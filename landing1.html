@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Revu — Learn characters that stick</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#211A3D;
+    --paper:#FAF7F2;
+    --paper-2:#F1ECE2;
+    --violet:#5B44E0;
+    --violet-deep:#3C2C9E;
+    --blue:#3E7BE0;
+    --gold:#D9A441;
+    --line: rgba(33,26,61,0.12);
+    --ink-soft: rgba(33,26,61,0.62);
+    --radius: 18px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  .display{font-family:'Fraunces', serif;}
+  .mono{font-family:'JetBrains Mono', monospace;}
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+
+  /* texture */
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background-image:radial-gradient(circle, rgba(33,26,61,0.05) 1px, transparent 1px);
+    background-size: 22px 22px;
+    pointer-events:none;
+    z-index:0;
+    opacity:0.5;
+  }
+
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px; position:relative; z-index:1;}
+
+  /* ===== NAV ===== */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(250,247,242,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex; align-items:center; justify-content:space-between; height:76px;}
+  .logo{display:flex; align-items:center; gap:10px; font-family:'Fraunces', serif; font-weight:700; font-size:1.4rem; letter-spacing:-0.01em;}
+  .logo .mark{
+    width:34px; height:34px; border-radius:9px;
+    background:linear-gradient(135deg, var(--violet), var(--blue));
+    display:flex; align-items:center; justify-content:center;
+    color:white; font-family:'Fraunces', serif; font-weight:700; font-size:1.1rem;
+    box-shadow: 0 4px 14px rgba(91,68,224,0.35);
+  }
+  .navlinks{display:flex; gap:34px; font-size:0.95rem; font-weight:500; color:var(--ink-soft);}
+  .navlinks a:hover{color:var(--ink);}
+  .navcta{display:flex; align-items:center; gap:18px;}
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    padding:11px 22px; border-radius:100px; font-weight:600; font-size:0.92rem;
+    border:1px solid transparent; cursor:pointer; transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+    white-space:nowrap;
+  }
+  .btn-primary{background:var(--ink); color:var(--paper);}
+  .btn-primary:hover{transform:translateY(-1px); box-shadow:0 8px 20px rgba(33,26,61,0.25);}
+  .btn-violet{background:linear-gradient(135deg, var(--violet), var(--blue)); color:white;}
+  .btn-violet:hover{transform:translateY(-1px); box-shadow:0 10px 24px rgba(91,68,224,0.38);}
+  .btn-ghost{background:transparent; color:var(--ink); border-color:var(--line);}
+  .btn-ghost:hover{border-color:var(--ink);}
+  .btn-lg{padding:15px 30px; font-size:1rem;}
+
+  /* ===== HERO ===== */
+  .hero{padding:96px 0 60px; position:relative;}
+  .hero-grid{display:grid; grid-template-columns:1.05fr 0.95fr; gap:60px; align-items:center;}
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'JetBrains Mono', monospace; font-size:0.75rem; letter-spacing:0.06em; text-transform:uppercase;
+    color:var(--violet-deep); background:rgba(91,68,224,0.08); border:1px solid rgba(91,68,224,0.18);
+    padding:6px 14px; border-radius:100px; margin-bottom:22px;
+  }
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);}
+  h1{
+    font-family:'Fraunces', serif; font-weight:600; font-size:clamp(2.6rem, 5vw, 4.1rem);
+    line-height:1.04; letter-spacing:-0.02em; margin-bottom:26px;
+  }
+  h1 em{font-style:italic; font-weight:500; color:var(--violet);}
+  .hero-sub{font-size:1.18rem; line-height:1.6; color:var(--ink-soft); max-width:480px; margin-bottom:36px;}
+  .hero-actions{display:flex; gap:14px; align-items:center; margin-bottom:38px; flex-wrap:wrap;}
+  .hero-note{font-size:0.85rem; color:var(--ink-soft);}
+  .hero-proof{display:flex; align-items:center; gap:22px; padding-top:26px; border-top:1px solid var(--line); max-width:480px;}
+  .proof-stat b{display:block; font-family:'Fraunces', serif; font-size:1.5rem; font-weight:600;}
+  .proof-stat span{font-size:0.78rem; color:var(--ink-soft);}
+
+  /* signature: stroke-order writer */
+  .hero-visual{position:relative;}
+  .stroke-card{
+    background:white; border-radius:24px; border:1px solid var(--line);
+    box-shadow: 0 30px 60px -20px rgba(33,26,61,0.25);
+    padding:34px; position:relative; overflow:hidden;
+  }
+  .stroke-card .tag{font-family:'JetBrains Mono', monospace; font-size:0.72rem; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:18px; display:flex; justify-content:space-between;}
+  .stroke-canvas{
+    background:var(--paper-2); border-radius:16px; aspect-ratio:1/1; max-width:340px; margin:0 auto;
+    display:flex; align-items:center; justify-content:center; position:relative;
+  }
+  .stroke-canvas svg{width:78%; height:78%;}
+  .stroke-path{
+    fill:none; stroke:var(--violet); stroke-width:22; stroke-linecap:round; stroke-linejoin:round;
+    stroke-dasharray: 900; stroke-dashoffset:900;
+    animation: draw 3.4s ease-in-out infinite;
+  }
+  .stroke-path.p2{ stroke:var(--blue); animation-delay:.9s;}
+  .stroke-ghost{fill:none; stroke:var(--ink); stroke-opacity:0.08; stroke-width:22; stroke-linecap:round; stroke-linejoin:round;}
+  @keyframes draw{
+    0%{stroke-dashoffset:900;}
+    35%{stroke-dashoffset:0;}
+    75%{stroke-dashoffset:0;}
+    100%{stroke-dashoffset:-900;}
+  }
+  .pinyin-float{
+    position:absolute; top:18px; left:50%; transform:translateX(-50%);
+    font-family:'JetBrains Mono', monospace; font-size:0.85rem; color:var(--ink-soft);
+  }
+  .stroke-foot{display:flex; justify-content:space-between; align-items:center; margin-top:20px;}
+  .stroke-word{font-family:'Fraunces', serif; font-size:1.05rem;}
+  .stroke-word .cn{color:var(--violet); font-weight:600; margin-right:6px;}
+  .mini-pill{font-family:'JetBrains Mono', monospace; font-size:0.72rem; background:var(--paper-2); padding:5px 10px; border-radius:100px; color:var(--ink-soft);}
+  .float-chip{
+    position:absolute; background:white; border:1px solid var(--line); border-radius:14px;
+    padding:12px 16px; box-shadow:0 14px 30px -10px rgba(33,26,61,0.25); font-size:0.82rem; font-weight:600;
+    display:flex; align-items:center; gap:8px;
+  }
+  .float-chip.c1{ top:-18px; right:-24px; color:var(--violet-deep); }
+  .float-chip.c2{ bottom:-16px; left:-28px; color:#227A5B;}
+  .chip-dot{width:8px;height:8px;border-radius:50%; background:var(--gold);}
+
+  /* ===== LOGOS / marquee ===== */
+  .strip{padding:34px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .strip .wrap{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:18px;}
+  .strip-item{font-family:'JetBrains Mono', monospace; font-size:0.82rem; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.05em;}
+  .strip-item b{color:var(--ink); font-weight:600;}
+
+  /* ===== SECTION HEADER ===== */
+  section{padding:110px 0;}
+  .sec-head{max-width:640px; margin-bottom:60px;}
+  .sec-eyebrow{font-family:'JetBrains Mono', monospace; font-size:0.75rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--violet); margin-bottom:14px; display:block;}
+  .sec-head h2{font-family:'Fraunces', serif; font-size:clamp(2rem, 3.4vw, 2.7rem); font-weight:600; letter-spacing:-0.015em; line-height:1.1; margin-bottom:16px;}
+  .sec-head p{font-size:1.08rem; color:var(--ink-soft); line-height:1.6;}
+
+  /* ===== CYCLE (how it works) ===== */
+  .cycle{display:grid; grid-template-columns:repeat(4,1fr); gap:0; position:relative;}
+  .cycle::before{
+    content:""; position:absolute; top:34px; left:60px; right:60px; height:1px;
+    background:repeating-linear-gradient(90deg, var(--line) 0 8px, transparent 8px 16px);
+  }
+  .cycle-step{position:relative; padding-right:20px;}
+  .cycle-num{
+    width:68px; height:68px; border-radius:50%; background:white; border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center; font-family:'Fraunces', serif; font-size:1.3rem; font-weight:600;
+    margin-bottom:22px; position:relative; z-index:2; color:var(--violet-deep);
+  }
+  .cycle-step h3{font-family:'Fraunces', serif; font-size:1.2rem; font-weight:600; margin-bottom:10px;}
+  .cycle-step p{font-size:0.94rem; color:var(--ink-soft); line-height:1.55;}
+
+  /* ===== SHOWCASE (screenshots) ===== */
+  .showcase-tabs{display:flex; gap:10px; margin-bottom:34px; flex-wrap:wrap;}
+  .tab{
+    padding:10px 18px; border-radius:100px; border:1px solid var(--line); background:white;
+    font-size:0.88rem; font-weight:600; cursor:pointer; color:var(--ink-soft); transition:all .15s ease;
+  }
+  .tab.active{background:var(--ink); color:var(--paper); border-color:var(--ink);}
+  .showcase-frame{
+    background:linear-gradient(180deg, var(--paper-2), var(--paper)); border:1px solid var(--line);
+    border-radius:26px; padding:26px; position:relative;
+  }
+  .browser-bar{display:flex; align-items:center; gap:8px; padding:0 6px 18px;}
+  .browser-dot{width:10px; height:10px; border-radius:50%; background:var(--line);}
+  .browser-url{
+    flex:1; margin-left:12px; background:white; border:1px solid var(--line); border-radius:100px;
+    padding:7px 16px; font-family:'JetBrains Mono', monospace; font-size:0.75rem; color:var(--ink-soft);
+  }
+  .showcase-img{border-radius:14px; overflow:hidden; border:1px solid var(--line); box-shadow:0 30px 60px -30px rgba(33,26,61,0.35);}
+  .showcase-img img{width:100%;}
+  .pane{display:none;}
+  .pane.active{display:block;}
+  .showcase-caption{display:flex; justify-content:space-between; align-items:flex-start; margin-top:22px; flex-wrap:wrap; gap:16px;}
+  .showcase-caption h4{font-family:'Fraunces', serif; font-size:1.15rem; font-weight:600; margin-bottom:6px;}
+  .showcase-caption p{color:var(--ink-soft); font-size:0.92rem; max-width:420px;}
+
+  /* ===== FEATURE GRID ===== */
+  .feat-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:20px; overflow:hidden;}
+  .feat{background:var(--paper); padding:36px 32px;}
+  .feat-icon{
+    width:44px; height:44px; border-radius:12px; margin-bottom:20px;
+    display:flex; align-items:center; justify-content:center; font-size:1.2rem;
+    background:linear-gradient(135deg, rgba(91,68,224,0.12), rgba(62,123,224,0.12));
+    color:var(--violet-deep);
+  }
+  .feat h3{font-family:'Fraunces', serif; font-size:1.12rem; font-weight:600; margin-bottom:10px;}
+  .feat p{font-size:0.92rem; color:var(--ink-soft); line-height:1.6;}
+
+  /* ===== TESTIMONIAL ===== */
+  .quote-band{background:var(--ink); color:var(--paper); border-radius:28px; padding:70px 60px; position:relative; overflow:hidden;}
+  .quote-band::after{
+    content:"好"; position:absolute; right:-30px; bottom:-60px; font-family:'Fraunces', serif; font-size:22rem;
+    color:rgba(255,255,255,0.04); font-weight:600; pointer-events:none;
+  }
+  .quote-band blockquote{font-family:'Fraunces', serif; font-size:clamp(1.5rem,2.6vw,2.1rem); font-weight:500; font-style:italic; line-height:1.35; max-width:720px; margin-bottom:28px;}
+  .quote-who{display:flex; align-items:center; gap:14px;}
+  .quote-avatar{width:44px; height:44px; border-radius:50%; background:linear-gradient(135deg,var(--violet),var(--blue));}
+  .quote-who b{display:block; font-size:0.95rem;}
+  .quote-who span{font-size:0.82rem; color:rgba(250,247,242,0.6);}
+
+  /* ===== PRICING ===== */
+  .pricing-grid{display:grid; grid-template-columns:1fr 1fr; gap:26px; align-items:stretch;}
+  .price-card{
+    background:white; border:1px solid var(--line); border-radius:24px; padding:40px; display:flex; flex-direction:column;
+  }
+  .price-card.pro{
+    background:linear-gradient(160deg, var(--ink) 0%, #2d2260 100%); color:var(--paper); border:none; position:relative;
+  }
+  .price-card.pro::before{
+    content:"Most popular"; position:absolute; top:24px; right:24px; font-family:'JetBrains Mono', monospace;
+    font-size:0.68rem; text-transform:uppercase; letter-spacing:0.06em; background:var(--gold); color:var(--ink);
+    padding:6px 12px; border-radius:100px; font-weight:700;
+  }
+  .plan-name{font-family:'Fraunces', serif; font-size:1.3rem; font-weight:600; margin-bottom:6px;}
+  .plan-desc{font-size:0.9rem; color:var(--ink-soft); margin-bottom:26px;}
+  .price-card.pro .plan-desc{color:rgba(250,247,242,0.65);}
+  .price-line{display:flex; align-items:flex-end; gap:8px; margin-bottom:8px;}
+  .price-amount{font-family:'Fraunces', serif; font-size:3rem; font-weight:600; letter-spacing:-0.02em;}
+  .price-period{font-size:0.95rem; color:var(--ink-soft); padding-bottom:10px;}
+  .price-card.pro .price-period{color:rgba(250,247,242,0.6);}
+  .price-billing{font-size:0.82rem; color:var(--ink-soft); margin-bottom:30px;}
+  .price-card.pro .price-billing{color:rgba(250,247,242,0.55);}
+  .price-feats{list-style:none; margin-bottom:34px; flex:1;}
+  .price-feats li{display:flex; align-items:flex-start; gap:10px; font-size:0.92rem; padding:9px 0; border-top:1px solid var(--line);}
+  .price-card.pro .price-feats li{border-top:1px solid rgba(250,247,242,0.12);}
+  .price-feats li:first-child{border-top:none;}
+  .check{color:var(--violet); font-weight:700; flex-shrink:0;}
+  .price-card.pro .check{color:var(--gold);}
+  .price-card .btn{width:100%;}
+  .billing-toggle{display:flex; align-items:center; justify-content:center; gap:14px; margin-bottom:44px;}
+  .toggle-track{
+    width:52px; height:28px; background:var(--paper-2); border:1px solid var(--line); border-radius:100px;
+    position:relative; cursor:pointer; flex-shrink:0;
+  }
+  .toggle-thumb{
+    width:22px; height:22px; background:white; border-radius:50%; position:absolute; top:2px; left:2px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.2); transition:left .2s ease; border:1px solid var(--line);
+  }
+  .toggle-track.on .toggle-thumb{left:27px; background:var(--violet); border-color:var(--violet);}
+  .save-badge{font-family:'JetBrains Mono', monospace; font-size:0.72rem; background:rgba(217,164,65,0.18); color:#8A6114; padding:4px 10px; border-radius:100px; font-weight:600;}
+
+  /* ===== FAQ ===== */
+  .faq-item{border-top:1px solid var(--line); padding:26px 0;}
+  .faq-item:last-child{border-bottom:1px solid var(--line);}
+  .faq-q{display:flex; justify-content:space-between; align-items:center; cursor:pointer; gap:20px;}
+  .faq-q h4{font-family:'Fraunces', serif; font-weight:600; font-size:1.08rem;}
+  .faq-toggle{width:26px; height:26px; border-radius:50%; border:1px solid var(--line); display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:0.9rem; transition:transform .2s ease;}
+  .faq-item.open .faq-toggle{transform:rotate(45deg); background:var(--ink); color:var(--paper); border-color:var(--ink);}
+  .faq-a{max-height:0; overflow:hidden; transition:max-height .25s ease;}
+  .faq-item.open .faq-a{max-height:200px;}
+  .faq-a p{padding-top:14px; color:var(--ink-soft); font-size:0.95rem; line-height:1.6; max-width:640px;}
+
+  /* ===== FINAL CTA ===== */
+  .final-cta{
+    background:linear-gradient(135deg, var(--violet), var(--blue)); border-radius:32px; padding:90px 60px; text-align:center; color:white; position:relative; overflow:hidden;
+  }
+  .final-cta h2{font-family:'Fraunces', serif; font-size:clamp(2rem,4vw,3rem); font-weight:600; margin-bottom:18px; letter-spacing:-0.02em;}
+  .final-cta p{opacity:0.9; margin-bottom:36px; font-size:1.05rem;}
+  .final-cta .btn-primary{background:white; color:var(--ink);}
+
+  /* ===== FOOTER ===== */
+  footer{padding:70px 0 40px; border-top:1px solid var(--line); margin-top:40px;}
+  .foot-grid{display:grid; grid-template-columns:1.4fr repeat(3,1fr); gap:40px; margin-bottom:50px;}
+  .foot-brand p{color:var(--ink-soft); font-size:0.92rem; margin-top:14px; max-width:260px; line-height:1.6;}
+  .foot-col h5{font-family:'JetBrains Mono', monospace; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-soft); margin-bottom:16px;}
+  .foot-col a{display:block; font-size:0.92rem; color:var(--ink); padding:6px 0; opacity:0.8;}
+  .foot-col a:hover{opacity:1; color:var(--violet);}
+  .foot-bottom{display:flex; justify-content:space-between; align-items:center; padding-top:26px; border-top:1px solid var(--line); font-size:0.82rem; color:var(--ink-soft); flex-wrap:wrap; gap:12px;}
+
+  /* ===== CHECKOUT MODAL ===== */
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(33,26,61,0.55); backdrop-filter:blur(4px);
+    display:none; align-items:center; justify-content:center; z-index:100; padding:20px;
+  }
+  .modal-overlay.show{display:flex;}
+  .modal{
+    background:white; border-radius:24px; max-width:440px; width:100%; padding:36px; position:relative;
+    box-shadow:0 40px 80px rgba(33,26,61,0.35);
+  }
+  .modal-close{position:absolute; top:20px; right:20px; width:32px; height:32px; border-radius:50%; border:1px solid var(--line); background:white; cursor:pointer; font-size:1rem;}
+  .modal h3{font-family:'Fraunces', serif; font-size:1.4rem; font-weight:600; margin-bottom:6px;}
+  .modal .sub{color:var(--ink-soft); font-size:0.9rem; margin-bottom:26px;}
+  .modal-summary{background:var(--paper-2); border-radius:14px; padding:16px 18px; display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; font-size:0.92rem;}
+  .modal-summary b{font-family:'Fraunces', serif; font-size:1.3rem;}
+  .field{margin-bottom:16px;}
+  .field label{display:block; font-size:0.82rem; font-weight:600; margin-bottom:7px; color:var(--ink-soft);}
+  .field input{
+    width:100%; padding:12px 14px; border:1px solid var(--line); border-radius:10px; font-size:0.94rem; font-family:'Inter',sans-serif;
+    background:var(--paper);
+  }
+  .field input:focus{outline:2px solid var(--violet); outline-offset:1px; border-color:var(--violet);}
+  .field-row{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+  .pay-methods{display:flex; gap:8px; margin-bottom:20px;}
+  .pay-methods span{
+    border:1px solid var(--line); border-radius:8px; padding:6px 10px; font-size:0.75rem; font-family:'JetBrains Mono',monospace; color:var(--ink-soft);
+  }
+  .modal .btn{width:100%; margin-top:6px;}
+  .modal-secure{display:flex; align-items:center; justify-content:center; gap:6px; font-size:0.75rem; color:var(--ink-soft); margin-top:16px;}
+
+  /* mobile */
+  @media (max-width: 900px){
+    .navlinks{display:none;}
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-visual{order:-1; max-width:400px; margin:0 auto;}
+    .cycle{grid-template-columns:1fr 1fr; row-gap:40px;}
+    .cycle::before{display:none;}
+    .feat-grid{grid-template-columns:1fr;}
+    .pricing-grid{grid-template-columns:1fr;}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+    .quote-band{padding:44px 28px;}
+    section{padding:70px 0;}
+    .field-row{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="logo"><span class="mark">R</span>Revu</div>
+    <div class="navlinks">
+      <a href="#how">How it works</a>
+      <a href="#screens">Inside the app</a>
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="navcta">
+      <a href="#" class="btn btn-ghost">Log in</a>
+      <a href="#pricing" class="btn btn-violet">Start free</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow"><span class="dot"></span> Built for language learners who forget on schedule</div>
+        <h1>Characters that fade less <em>every time</em> you see them.</h1>
+        <p class="hero-sub">Revu pairs a spaced-repetition engine with stroke-order writing practice, so vocabulary graduates from "recognized" to "remembered" — for Chinese characters and any language you're learning.</p>
+        <div class="hero-actions">
+          <button class="btn btn-violet btn-lg" onclick="openCheckout('pro')">Start free trial</button>
+          <a href="#screens" class="btn btn-ghost btn-lg">See it in action ↓</a>
+        </div>
+        <div class="hero-proof">
+          <div class="proof-stat"><b>4</b><span>Mastery stages</span></div>
+          <div class="proof-stat"><b>SM-2</b><span>Adaptive review engine</span></div>
+          <div class="proof-stat"><b>∞</b><span>Decks, any language</span></div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="float-chip c1"><span class="chip-dot"></span> Streak +1</div>
+        <div class="float-chip c2">✓ Mastered</div>
+        <div class="stroke-card">
+          <div class="tag"><span>Learn session</span><span>好 · hǎo</span></div>
+          <div class="stroke-canvas">
+            <svg viewBox="0 0 200 200">
+              <path class="stroke-ghost" d="M60 40 C55 70 50 110 40 150 M40 90 L95 80"/>
+              <path class="stroke-ghost" d="M115 35 L110 165 M85 70 L165 60 M90 115 L160 108 M120 165 C140 165 158 158 165 140"/>
+              <path class="stroke-path" d="M60 40 C55 70 50 110 40 150 M40 90 L95 80"/>
+              <path class="stroke-path p2" d="M115 35 L110 165 M85 70 L165 60 M90 115 L160 108 M120 165 C140 165 158 158 165 140"/>
+            </svg>
+            <div class="pinyin-float">hǎo</div>
+          </div>
+          <div class="stroke-foot">
+            <div class="stroke-word"><span class="cn">好</span>good</div>
+            <div class="mini-pill">stroke 5/6</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="strip">
+  <div class="wrap">
+    <div class="strip-item"><b>Chinese</b> · HSK 1–6</div>
+    <div class="strip-item"><b>French</b> · vocab decks</div>
+    <div class="strip-item"><b>Russian</b> · reversed drills</div>
+    <div class="strip-item"><b>Any deck</b> · import from Excel</div>
+    <div class="strip-item">Free forever tier</div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-eyebrow">The loop</span>
+      <h2>One card, four honest steps.</h2>
+      <p>No streak-shaming, no mystery algorithm. Every card moves through the same cycle — and you can see exactly why it's due when it is.</p>
+    </div>
+    <div class="cycle">
+      <div class="cycle-step">
+        <div class="cycle-num">好</div>
+        <h3>See the character</h3>
+        <p>New cards introduce pinyin, meaning, and stroke order together — nothing quizzed before it's been shown.</p>
+      </div>
+      <div class="cycle-step">
+        <div class="cycle-num">✎</div>
+        <h3>Trace the strokes</h3>
+        <p>Draw it yourself with HanziWriter-powered outline tracing. Muscle memory, not just recognition.</p>
+      </div>
+      <div class="cycle-step">
+        <div class="cycle-num">?</div>
+        <h3>Recall cold</h3>
+        <p>A recall phase strips the hints. If you hesitate, that's data — not a failure.</p>
+      </div>
+      <div class="cycle-step">
+        <div class="cycle-num">↻</div>
+        <h3>Reschedule fairly</h3>
+        <p>An SM-2 engine spaces the next review based on how it actually went — reviews you nail move further out.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCREENS -->
+<section id="screens">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-eyebrow">Inside the app</span>
+      <h2>Every screen, built around one question: what's due, and why?</h2>
+      <p>A dashboard that tells you the truth about your progress, and a study flow that doesn't waste a single card.</p>
+    </div>
+
+    <div class="showcase-tabs">
+      <button class="tab active" data-pane="p1">Dashboard</button>
+      <button class="tab" data-pane="p2">Review session</button>
+      <button class="tab" data-pane="p3">Learn session</button>
+    </div>
+
+    <div class="showcase-frame">
+      <div class="browser-bar">
+        <div class="browser-dot"></div><div class="browser-dot"></div><div class="browser-dot"></div>
+        <div class="browser-url">app.revu.study</div>
+      </div>
+
+      <div class="pane active" id="p1">
+        <div class="showcase-img"><img src="assets/dashboard.png" alt="Revu dashboard showing streak, cards due, mastered count, and continue-learning decks"></div>
+        <div class="showcase-caption">
+          <div><h4>The dashboard tells it straight</h4><p>Streak, cards due, and mastery count up front — plus every deck you're mid-way through, ready to resume in one tap.</p></div>
+          <div class="mini-pill">Level 7 · 108/191 XP</div>
+        </div>
+      </div>
+
+      <div class="pane" id="p2">
+        <div class="showcase-img"><img src="assets/review.png" alt="Revu review session showing a flip card with Again, Hard, Good, Easy rating buttons"></div>
+        <div class="showcase-caption">
+          <div><h4>Rate honestly, review fairly</h4><p>Four ratings, not two. "Hard" isn't "wrong" — it just means the next review comes sooner.</p></div>
+          <div class="mini-pill">Progress 0/1</div>
+        </div>
+      </div>
+
+      <div class="pane" id="p3">
+        <div class="showcase-img"><img src="assets/learn.png" alt="Revu learn session showing a Chinese character with stroke-order animation and pinyin"></div>
+        <div class="showcase-caption">
+          <div><h4>Stroke order, animated</h4><p>New Chinese characters play their stroke order before you're asked to trace or recall them.</p></div>
+          <div class="mini-pill">好 · hǎo · good</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-eyebrow">What's under the hood</span>
+      <h2>Not just flashcards. A system that adapts to you.</h2>
+    </div>
+    <div class="feat-grid">
+      <div class="feat">
+        <div class="feat-icon">↻</div>
+        <h3>Adaptive scheduling</h3>
+        <p>An SM-2-based engine tracks lapses and intervals per card, so mastered cards drift to the back without ever leaving rotation.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">筆</div>
+        <h3>Stroke-order tracing</h3>
+        <p>Chinese character decks include animated stroke order, guided outline tracing, and a cold-recall quiz phase — powered by HanziWriter.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">⌘</div>
+        <h3>Bulk import</h3>
+        <p>Bring your own vocabulary from Excel or CSV. Field mapping and CJK validation catch mistakes before they become bad cards.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">◔</div>
+        <h3>Four mastery stages</h3>
+        <p>New → Familiar → Solid → Mastered. Depth is computed from your review history, not a status you can accidentally reset.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">▦</div>
+        <h3>Heatmap & streaks</h3>
+        <p>A full activity calendar and streak tracking that freezes fairly on days a deck simply has nothing due.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">⇄</div>
+        <h3>Deck cloning</h3>
+        <p>Swap languages, convert a deck to Chinese-character mode, or build a remedial deck from your missed cards in one click.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section>
+  <div class="wrap">
+    <div class="quote-band">
+      <blockquote>"I stopped dreading review sessions. Watching a character I used to blank on drop into 'Mastered' feels like the whole point of studying."</blockquote>
+      <div class="quote-who">
+        <div class="quote-avatar"></div>
+        <div><b>Mei L.</b><span>HSK 4 learner, 87-day streak</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="wrap">
+    <div class="sec-head" style="margin-left:auto; margin-right:auto; text-align:center;">
+      <span class="sec-eyebrow">Pricing</span>
+      <h2>Study for free. Upgrade when you outgrow it.</h2>
+      <p style="margin:0 auto;">No ads, ever. Pro just removes the ceiling.</p>
+    </div>
+
+    <div class="billing-toggle">
+      <span class="mono" style="font-size:0.85rem;">Monthly</span>
+      <div class="toggle-track" id="billingToggle" onclick="toggleBilling()"><div class="toggle-thumb"></div></div>
+      <span class="mono" style="font-size:0.85rem;">Annual</span>
+      <span class="save-badge">Save 20%</span>
+    </div>
+
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="plan-name">Free</div>
+        <div class="plan-desc">Everything you need to build the habit.</div>
+        <div class="price-line"><span class="price-amount">$0</span><span class="price-period">/ forever</span></div>
+        <div class="price-billing">No card required</div>
+        <ul class="price-feats">
+          <li><span class="check">✓</span> Unlimited decks &amp; cards</li>
+          <li><span class="check">✓</span> Full SM-2 spaced repetition</li>
+          <li><span class="check">✓</span> Stroke-order tracing (1 deck)</li>
+          <li><span class="check">✓</span> Streaks &amp; activity heatmap</li>
+          <li><span class="check">✓</span> Excel/CSV import</li>
+        </ul>
+        <a href="#" class="btn btn-ghost">Continue free</a>
+      </div>
+
+      <div class="price-card pro">
+        <div class="plan-name">Pro</div>
+        <div class="plan-desc" style="color:rgba(250,247,242,0.65)">For learners chasing fluency, not just streaks.</div>
+        <div class="price-line"><span class="price-amount" id="proPrice">$6</span><span class="price-period" id="proPeriod">/ month</span></div>
+        <div class="price-billing" id="proBilling">Billed monthly · cancel anytime</div>
+        <ul class="price-feats">
+          <li><span class="check">✓</span> Everything in Free</li>
+          <li><span class="check">✓</span> Stroke tracing on every deck</li>
+          <li><span class="check">✓</span> Deck cloning &amp; remedial decks</li>
+          <li><span class="check">✓</span> Advanced mastery analytics</li>
+          <li><span class="check">✓</span> Priority sync across devices</li>
+          <li><span class="check">✓</span> Custom avatar upload history</li>
+        </ul>
+        <button class="btn btn-primary" onclick="openCheckout('pro')">Upgrade to Pro</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-eyebrow">Questions</span>
+      <h2>Before you ask in the review queue</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item open">
+        <div class="faq-q" onclick="toggleFaq(this)"><h4>Is Revu only for Chinese?</h4><span class="faq-toggle">+</span></div>
+        <div class="faq-a"><p>No — standard flashcard decks work for any language. Stroke-order writing practice is specific to Chinese character (Hanzi) decks.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><h4>What happens to my streak if I miss a day?</h4><span class="faq-toggle">+</span></div>
+        <div class="faq-a"><p>If a deck has nothing due, that day is frozen rather than counted as a break. Streaks only reset when cards were available and genuinely went unstudied.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><h4>Can I cancel Pro anytime?</h4><span class="faq-toggle">+</span></div>
+        <div class="faq-a"><p>Yes, from Settings → Account. You'll keep Pro features until the end of your current billing period, then drop back to Free — your decks and history stay intact.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><h4>Can I import an existing Anki or Excel deck?</h4><span class="faq-toggle">+</span></div>
+        <div class="faq-a"><p>Yes. The import wizard maps CSV/Excel columns to fields and validates CJK characters before creating cards, on both Free and Pro.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section>
+  <div class="wrap">
+    <div class="final-cta">
+      <h2>Your next review is already waiting.</h2>
+      <p>Start free — no card, no trial clock, just cards due today.</p>
+      <button class="btn btn-primary btn-lg" onclick="openCheckout('pro')">Start learning free</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="logo"><span class="mark">R</span>Revu</div>
+        <p>Spaced repetition and stroke-order practice for learners who want words to actually stay learned.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Product</h5>
+        <a href="#how">How it works</a>
+        <a href="#screens">Inside the app</a>
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+      </div>
+      <div class="foot-col">
+        <h5>Company</h5>
+        <a href="#">About</a>
+        <a href="#">Blog</a>
+        <a href="#">Contact</a>
+      </div>
+      <div class="foot-col">
+        <h5>Legal</h5>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Revu. All rights reserved.</span>
+      <span class="mono">Made for people who keep forgetting 的 the same character.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- CHECKOUT MODAL -->
+<div class="modal-overlay" id="checkoutOverlay">
+  <div class="modal">
+    <button class="modal-close" onclick="closeCheckout()">✕</button>
+    <h3>Upgrade to Revu Pro</h3>
+    <div class="sub">Full access to stroke tracing, deck cloning, and analytics.</div>
+    <div class="modal-summary">
+      <span>Pro plan — <span id="modalPeriodLabel">monthly</span></span>
+      <b id="modalPrice">$6.00</b>
+    </div>
+    <div class="pay-methods">
+      <span>💳 Card</span><span>🅿 PayPal</span><span> Apple Pay</span><span>G Pay</span>
+    </div>
+    <div class="field">
+      <label>Card number</label>
+      <input type="text" placeholder="4242 4242 4242 4242" inputmode="numeric">
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label>Expiry</label>
+        <input type="text" placeholder="MM / YY">
+      </div>
+      <div class="field">
+        <label>CVC</label>
+        <input type="text" placeholder="123">
+      </div>
+    </div>
+    <div class="field">
+      <label>Email</label>
+      <input type="email" placeholder="you@example.com">
+    </div>
+    <button class="btn btn-violet" onclick="submitCheckout()">Pay &amp; upgrade</button>
+    <div class="modal-secure">🔒 Payments handled securely by Stripe</div>
+  </div>
+</div>
+
+<script>
+  // tab switching for screenshots
+  document.querySelectorAll('.tab').forEach(tab=>{
+    tab.addEventListener('click', ()=>{
+      document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+      document.querySelectorAll('.pane').forEach(p=>p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById(tab.dataset.pane).classList.add('active');
+    });
+  });
+
+  // faq accordion
+  function toggleFaq(el){
+    const item = el.parentElement;
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+    if(!wasOpen) item.classList.add('open');
+  }
+
+  // billing toggle
+  let annual = false;
+  function toggleBilling(){
+    annual = !annual;
+    document.getElementById('billingToggle').classList.toggle('on', annual);
+    const price = document.getElementById('proPrice');
+    const period = document.getElementById('proPeriod');
+    const billing = document.getElementById('proBilling');
+    if(annual){
+      price.textContent = '$4.80';
+      period.textContent = '/ month';
+      billing.textContent = 'Billed $57.60 yearly · cancel anytime';
+    } else {
+      price.textContent = '$6';
+      period.textContent = '/ month';
+      billing.textContent = 'Billed monthly · cancel anytime';
+    }
+  }
+
+  // checkout modal
+  function openCheckout(){
+    document.getElementById('checkoutOverlay').classList.add('show');
+    document.getElementById('modalPrice').textContent = annual ? '$57.60' : '$6.00';
+    document.getElementById('modalPeriodLabel').textContent = annual ? 'annual' : 'monthly';
+    document.body.style.overflow = 'hidden';
+  }
+  function closeCheckout(){
+    document.getElementById('checkoutOverlay').classList.remove('show');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('checkoutOverlay').addEventListener('click', (e)=>{
+    if(e.target.id === 'checkoutOverlay') closeCheckout();
+  });
+  function submitCheckout(){
+    alert('This is a demo checkout UI — wire this button to your real Stripe Checkout session or Payment Element to accept live payments.');
+  }
+</script>
+
+</body>
+</html>
