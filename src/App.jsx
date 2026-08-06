@@ -3,7 +3,6 @@ import { ThemeProvider } from "./context/ThemeContext";
 import Navbar from "./components/layout/Navbar";
 import SoftGradientBackground from "./components/effects/SoftGradientBackground";
 import Hero from "./components/sections/Hero";
-import LogoStrip from "./components/sections/LogoStrip";
 import HowItWorks from "./components/sections/HowItWorks";
 import Screenshots from "./components/sections/Screenshots";
 import Features from "./components/sections/Features";
@@ -21,9 +20,8 @@ export default function App() {
       <SoftGradientBackground>
         <Navbar />
         <main>
-          {/* <Hero /> */}
-          {/* <LogoStrip />
-          <HowItWorks />
+          <Hero />
+          {/* <HowItWorks />
           <Screenshots />
           <Features />
           <Testimonial />

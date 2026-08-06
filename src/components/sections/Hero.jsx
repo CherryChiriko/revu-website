@@ -1,115 +1,69 @@
-// src/components/sections/Hero.jsx
+import React from "react";
 import { useTheme } from "../../context/ThemeContext";
-import Button from "../ui/Button";
-import FlipCardDemo from "../demos/FlipcardDemo";
-// import AnimatedStroke from "../ui/AnimatedStroke";
-
-const PROOF_STATS = [
-  { value: "4", label: "Mastery stages" },
-  { value: "SM-2", label: "Adaptive review engine" },
-  { value: "∞", label: "Decks, any language" },
-];
 
 export default function Hero() {
-  const { theme } = useTheme();
+  const t = useTheme();
 
   return (
-    <section className="relative pt-24 pb-16 overflow-hidden">
-      <div className="mx-auto max-w-[1180px] px-8">
-        <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-16 items-center">
-          {/* Left: Content */}
-          <div className="order-2 lg:order-1">
-            {/* Headline */}
-            <h1
-              className={[
-                "font-serif text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight leading-[1.04] mb-7",
-                theme.text.primary,
-              ].join(" ")}
-            >
-              Characters that fade less{" "}
-              <em
-                className={[theme.text.accent3, "not-italic font-medium"].join(
-                  " ",
-                )}
-              >
-                every time
-              </em>{" "}
-              you see them.
-            </h1>
+    <section className="relative min-h-[90vh] flex flex-col justify-center overflow-hidden pt-16 pb-24 select-none">
+      {/* Central Glow Atmosphere */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-gradient-to-tr from-indigo-600/30 via-purple-600/20 to-pink-500/0 blur-[140px] pointer-events-none rounded-full" />
 
-            {/* Subtitle */}
-            <p
-              className={[
-                "text-lg sm:text-xl leading-relaxed max-w-lg mb-9",
-                theme.text.secondary,
-              ].join(" ")}
-            >
-              Revu pairs a spaced-repetition engine with stroke-order writing
-              practice, so vocabulary graduates from "recognized" to
-              "remembered" — for Chinese characters and any language you're
-              learning.
-            </p>
+      <div className="relative mx-auto max-w-[1280px] px-6 md:px-12 flex flex-col items-center text-center z-10">
+        {/* Hero Title with Gradient Text & Stroke Outline */}
+        <h1 className="max-w-4xl text-5xl sm:text-7xl lg:text-8xl font-extrabold tracking-tighter leading-[1.05] text-white">
+          Vocabulary that{" "}
+          <span
+            className="bg-gradient-to-r from-indigo-400 via-purple-300 to-pink-400 bg-clip-text text-transparent"
+            style={{
+              filter: `
+        drop-shadow(1px 0px 0px rgba(255, 255, 255, 0.3))
+        drop-shadow(-1px 0px 0px rgba(255, 255, 255, 0.3))
+        drop-shadow(0px 1px 0px rgba(255, 255, 255, 0.3))
+        drop-shadow(0px -1px 0px rgba(255, 255, 255, 0.3))
+        drop-shadow(0 0 18px rgba(129, 140, 248, 0.4))
+      `,
+            }}
+          >
+            actually sticks.
+          </span>
+        </h1>
 
-            {/* CTAs */}
-            <div className="flex flex-wrap gap-3.5 items-center mb-10">
-              <Button
-                variant="accent"
-                size="lg"
-                onClick={() => window.openCheckout?.("pro")}
-              >
-                Start free trial
-              </Button>
-              <Button variant="ghost" size="lg" href="#screens">
-                See it in action ↓
-              </Button>
-            </div>
+        {/* Subtitle with dark backdrop contrast shadow */}
+        <p
+          className={`mt-8 max-w-2xl text-lg sm:text-xl font-normal leading-relaxed opacity-90 ${t.textSecondary} [text-shadow:_0_1px_8px_rgba(0,0,0,0.4)]`}
+        >
+          Revu uses smart spaced repetition to help you capture, store, and
+          effortlessly recall new words whenever you need them.
+        </p>
 
-            {/* Proof stats */}
-            <div
-              className={[
-                "flex gap-8 sm:gap-10 pt-7 border-t max-w-lg",
-                theme.border.muted,
-              ].join(" ")}
+        <div className="mt-10 flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
+          <a
+            href="#pricing"
+            className="group relative w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 rounded-full text-sm font-semibold text-white transition-all duration-300 shadow-[0_0_30px_rgba(124,108,240,0.5)] bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 bg-[length:200%_auto] hover:bg-right hover:scale-[1.02]"
+          >
+            <span>Start Building Free</span>
+            <svg
+              className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
             >
-              {PROOF_STATS.map((stat) => (
-                <div key={stat.label}>
-                  <b
-                    className={[
-                      "block font-serif text-2xl font-semibold mb-0.5",
-                      theme.text.primary,
-                    ].join(" ")}
-                  >
-                    {stat.value}
-                  </b>
-                  <span className={["text-xs", theme.text.muted].join(" ")}>
-                    {stat.label}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M14 5l7 7m0 0l-7 7m7-7H3"
+              />
+            </svg>
+          </a>
 
-          {/* Right: Visual */}
-          <div className="order-1 lg:order-2 w-full max-w-md mx-auto">
-            <div
-              className={[
-                "relative aspect-[4/3] rounded-3xl p-6 shadow-2xl",
-                theme.background.primary,
-                theme.border.muted,
-                "border",
-              ].join(" ")}
-            >
-              <FlipCardDemo activeTheme={theme} />
-            </div>
-
-            <p
-              className={["text-center mt-4 text-sm", theme.text.muted].join(
-                " ",
-              )}
-            >
-              Flip cards → recall → remember
-            </p>
-          </div>
+          <a
+            href="#demo"
+            className={`w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 rounded-full text-sm font-medium border backdrop-blur-md transition-all duration-200 hover:bg-white/10 ${t.surfaceBorder} ${t.textPrimary}`}
+          >
+            Explore Platform &rarr;
+          </a>
         </div>
       </div>
     </section>

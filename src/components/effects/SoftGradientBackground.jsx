@@ -39,30 +39,37 @@ export default function SoftGradientBackground({ children, className = "" }) {
     const initBlobs = () => {
       const colors = getColors();
 
-      // Dynamic ambient drift setup with soft cursor interaction
       const behaviors = [
-        { radius: 0.42, driftSpeed: 0.0008, followWeight: 0.08, delay: 0 },
-        { radius: 0.36, driftSpeed: 0.0006, followWeight: 0.05, delay: 100 },
-        { radius: 0.45, driftSpeed: 0.0009, followWeight: 0.1, delay: 200 },
-        { radius: 0.32, driftSpeed: 0.0007, followWeight: 0.06, delay: 300 },
-        { radius: 0.38, driftSpeed: 0.0005, followWeight: 0.07, delay: 400 },
-        { radius: 0.28, driftSpeed: 0.001, followWeight: 0.12, delay: 500 },
-        { radius: 0.4, driftSpeed: 0.0004, followWeight: 0.04, delay: 600 },
-        { radius: 0.34, driftSpeed: 0.0008, followWeight: 0.09, delay: 700 },
+        { radius: 0.35, driftSpeed: 0.0006, followWeight: 0.05, delay: 0 },
+        { radius: 0.3, driftSpeed: 0.0008, followWeight: 0.04, delay: 100 },
+        { radius: 0.38, driftSpeed: 0.0005, followWeight: 0.06, delay: 200 },
+        { radius: 0.28, driftSpeed: 0.0007, followWeight: 0.05, delay: 300 },
+        { radius: 0.32, driftSpeed: 0.0004, followWeight: 0.03, delay: 400 },
+        { radius: 0.25, driftSpeed: 0.0009, followWeight: 0.07, delay: 500 },
+        { radius: 0.36, driftSpeed: 0.0005, followWeight: 0.04, delay: 600 },
+        { radius: 0.3, driftSpeed: 0.0007, followWeight: 0.05, delay: 700 },
       ];
 
-      blobsRef.current = behaviors.map((b, i) => ({
-        x: width * 0.5 + (Math.random() - 0.5) * (width * 0.6),
-        y: height * 0.5 + (Math.random() - 0.5) * (height * 0.6),
-        vx: 0,
-        vy: 0,
-        color: colors[i] || "#6366f1",
-        ...b,
-        baseRadius: Math.min(width, height) * b.radius,
-        phaseX: Math.random() * Math.PI * 2,
-        phaseY: Math.random() * Math.PI * 2,
-        breathePhase: Math.random() * Math.PI * 2,
-      }));
+      blobsRef.current = behaviors.map((b, i) => {
+        // Distribute base anchor points evenly around the screen edges & corners
+        const anchorX = ((i % 3) + 0.5) * (width / 3);
+        const anchorY = (Math.floor(i / 3) + 0.5) * (height / 3);
+
+        return {
+          x: anchorX,
+          y: anchorY,
+          anchorX,
+          anchorY,
+          vx: 0,
+          vy: 0,
+          color: colors[i] || "#6366f1",
+          ...b,
+          baseRadius: Math.min(width, height) * b.radius,
+          phaseX: Math.random() * Math.PI * 2,
+          phaseY: Math.random() * Math.PI * 2,
+          breathePhase: Math.random() * Math.PI * 2,
+        };
+      });
     };
 
     const resize = () => {
@@ -111,7 +118,7 @@ export default function SoftGradientBackground({ children, className = "" }) {
       ctx.fillRect(0, 0, width, height);
 
       // Adaptive blend mode for light/dark theme contrast
-      ctx.globalCompositeOperation = theme.isDark ? "screen" : "multiply";
+      ctx.globalCompositeOperation = theme.isDark ? "screen" : "source-over";
 
       // Render Floating Blobs
       blobsRef.current.forEach((blob) => {
@@ -122,27 +129,28 @@ export default function SoftGradientBackground({ children, className = "" }) {
         if (easeEntrance <= 0) return;
 
         // Ambient fluid drift calculation
+        // Inside animate():
         const ambientX =
-          Math.sin(time * blob.driftSpeed + blob.phaseX) * (width * 0.2);
+          Math.sin(time * blob.driftSpeed + blob.phaseX) * (width * 0.35);
         const ambientY =
           Math.cos(time * (blob.driftSpeed * 0.8) + blob.phaseY) *
-          (height * 0.2);
+          (height * 0.35);
 
-        // Gentle magnetic displacement toward mouse
         const dx = mouse.x - blob.x;
         const dy = mouse.y - blob.y;
         const dist = Math.sqrt(dx * dx + dy * dy) || 1;
         const pushForce = Math.max(
           0,
-          1 - dist / (Math.min(width, height) * 0.5),
+          1 - dist / (Math.min(width, height) * 0.6),
         );
 
+        // Target moves around the blob's individual anchor point rather than center-screen (width * 0.5)
         const targetX =
-          width * 0.5 +
+          blob.anchorX +
           ambientX +
           (dx / dist) * pushForce * (width * blob.followWeight);
         const targetY =
-          height * 0.5 +
+          blob.anchorY +
           ambientY +
           (dy / dist) * pushForce * (height * blob.followWeight);
 
