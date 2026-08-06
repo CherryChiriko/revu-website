@@ -21,18 +21,18 @@ export default function App() {
       <SoftGradientBackground>
         <Navbar />
         <main>
-          <Hero />
-          <LogoStrip />
+          {/* <Hero /> */}
+          {/* <LogoStrip />
           <HowItWorks />
           <Screenshots />
           <Features />
           <Testimonial />
           <Pricing onUpgrade={(plan) => window.openCheckout?.(plan)} />
           <FAQ />
-          <FinalCTA onStart={() => window.openCheckout?.("pro")} />
+          <FinalCTA onStart={() => window.openCheckout?.("pro")} /> */}
         </main>
-        <Footer />
-        <CheckoutModal />
+        {/* <Footer /> */}
+        {/* <CheckoutModal /> */}
       </SoftGradientBackground>
       {/* </div> */}
     </ThemeProvider>

@@ -1,4 +1,3 @@
-// src/context/ThemeContext.jsx
 import {
   createContext,
   useContext,
@@ -6,15 +5,15 @@ import {
   useCallback,
   useMemo,
 } from "react";
-import themes from "../../../revu-app/src/assets/themes";
+import { themes } from "../config/themes";
 
 const ThemeContext = createContext(null);
 
 export function ThemeProvider({ children, defaultTheme = "light" }) {
   const [currentThemeId, setCurrentThemeId] = useState(defaultTheme);
 
-  const theme = useMemo(
-    () => themes.find((t) => t.id === currentThemeId) || themes[0],
+  const activeTheme = useMemo(
+    () => themes[currentThemeId] || themes.light,
     [currentThemeId],
   );
 
@@ -23,19 +22,26 @@ export function ThemeProvider({ children, defaultTheme = "light" }) {
   }, []);
 
   const setTheme = useCallback((id) => {
-    const found = themes.find((t) => t.id === id);
-    if (found) setCurrentThemeId(id);
+    if (themes[id]) {
+      setCurrentThemeId(id);
+    }
   }, []);
 
   const value = useMemo(
     () => ({
-      theme,
+      // Spread all properties from active theme (e.g. navBg, ring, surface, etc.)
+      ...activeTheme,
+
+      // Retain activeTheme under 'theme' key for backwards compatibility
+      theme: activeTheme,
+
+      // Context metadata & controls
       currentThemeId,
       toggleTheme,
       setTheme,
-      isDark: theme.isDark,
+      isDark: activeTheme.isDark,
     }),
-    [theme, currentThemeId, toggleTheme, setTheme],
+    [activeTheme, currentThemeId, toggleTheme, setTheme],
   );
 
   return (
@@ -45,8 +51,10 @@ export function ThemeProvider({ children, defaultTheme = "light" }) {
 
 export function useTheme() {
   const context = useContext(ThemeContext);
+
   if (!context) {
     throw new Error("useTheme must be used within a ThemeProvider");
   }
+
   return context;
 }

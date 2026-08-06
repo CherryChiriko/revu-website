@@ -19,19 +19,6 @@ export default function Hero() {
         <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-16 items-center">
           {/* Left: Content */}
           <div className="order-2 lg:order-1">
-            {/* Eyebrow */}
-            <div
-              className={[
-                "inline-flex items-center gap-2 mb-6 px-3.5 py-1.5 rounded-full border font-mono text-xs uppercase tracking-widest",
-                theme.text.accent3,
-                theme.border.muted,
-                theme.background.secondary,
-              ].join(" ")}
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
-              Built for language learners who forget on schedule
-            </div>
-
             {/* Headline */}
             <h1
               className={[
