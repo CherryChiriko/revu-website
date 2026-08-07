@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useTheme } from "../../context/ThemeContext";
 import SectionHeader from "../ui/SectionHeader";
 import TabGroup from "../ui/TabGroup";
-import BrowserFrame from "../ui/BrowserFrame";
 
 const PANES = [
   {
@@ -57,43 +56,13 @@ export default function Screenshots() {
 
         <TabGroup tabs={tabs} defaultTab="dashboard" onChange={setActivePane} />
 
-        <BrowserFrame>
-          <img
-            src={currentPane.image}
-            alt={currentPane.alt}
-            className="w-full h-auto"
-            loading="lazy"
-          />
-        </BrowserFrame>
-
         {/* Caption */}
         <div className="flex flex-wrap justify-between items-start gap-4 mt-6">
           <div className="max-w-md">
-            <h4
-              className={[
-                "font-serif text-lg font-semibold mb-1.5",
-                theme.text.primary,
-              ].join(" ")}
-            >
-              {currentPane.title}
-            </h4>
-            <p
-              className={["text-sm leading-relaxed", theme.text.secondary].join(
-                " ",
-              )}
-            >
-              {currentPane.description}
-            </p>
+            <h4>{currentPane.title}</h4>
+            <p>{currentPane.description}</p>
           </div>
-          <span
-            className={[
-              "font-mono text-xs px-3 py-1.5 rounded-full shrink-0",
-              theme.background.track,
-              theme.text.muted,
-            ].join(" ")}
-          >
-            {currentPane.badge}
-          </span>
+          <span>{currentPane.badge}</span>
         </div>
       </div>
     </section>

@@ -1,100 +1,217 @@
-// src/components/layout/Footer.jsx
-import { useTheme } from "../../context/ThemeContext";
-// import Logo from "../ui/Logo";
-
-const FOOTER_LINKS = [
-  {
-    title: "Product",
-    links: [
-      { label: "How it works", href: "#how" },
-      { label: "Inside the app", href: "#screens" },
-      { label: "Features", href: "#features" },
-      { label: "Pricing", href: "#pricing" },
-    ],
-  },
-  {
-    title: "Company",
-    links: [
-      { label: "About", href: "#" },
-      { label: "Blog", href: "#" },
-      { label: "Contact", href: "#" },
-    ],
-  },
-  {
-    title: "Legal",
-    links: [
-      { label: "Privacy", href: "#" },
-      { label: "Terms", href: "#" },
-    ],
-  },
-];
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faTwitter,
+  faGithub,
+  faDiscord,
+} from "@fortawesome/free-brands-svg-icons";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 export default function Footer() {
-  const { theme } = useTheme();
-
   return (
-    <footer
-      className={["border-t pt-16 pb-10 mt-10", theme.border.muted].join(" ")}
-    >
-      <div className="mx-auto max-w-[1180px] px-8">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-[1.4fr_repeat(3,1fr)] gap-10 mb-12">
-          {/* Brand */}
-          <div>
-            {/* <Logo /> */}
-            <p
-              className={[
-                "mt-3.5 text-sm leading-relaxed max-w-xs",
-                theme.text.secondary,
-              ].join(" ")}
-            >
-              Spaced repetition and stroke-order practice for learners who want
-              words to actually stay learned.
+    <footer className="relative border-t border-slate-800/80 bg-slate-950 text-slate-400 text-sm select-none overflow-hidden">
+      {/* Top Ambient Glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[150px] bg-indigo-600/5 blur-[120px] pointer-events-none rounded-full" />
+
+      <div className="relative max-w-7xl mx-auto px-6 pt-16 pb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-16">
+          {/* Brand Column */}
+          <div className="lg:col-span-2 space-y-4">
+            <div className="flex items-center space-x-2">
+              <span className="text-2xl font-black tracking-wider text-white">
+                REVU
+              </span>
+              <span className="p-1 rounded-md bg-indigo-500/10 border border-indigo-500/30 text-indigo-400">
+                {/* <FontAwesomeIcon icon={faSparkles} className="w-3 h-3" /> */}
+              </span>
+            </div>
+            <p className="text-slate-400 text-xs sm:text-sm leading-relaxed max-w-sm">
+              Smart active recall, Kanji tracing, and spaced repetition
+              engineered to turn temporary words into permanent memory.
             </p>
+
+            {/* Newsletter Input */}
+            <div className="pt-2 max-w-sm">
+              <p className="text-xs font-semibold text-slate-300 mb-2">
+                Subscribe to learning tips & updates
+              </p>
+              <form
+                onSubmit={(e) => e.preventDefault()}
+                className="flex items-center bg-slate-900 border border-slate-800 rounded-full p-1 focus-within:border-indigo-500/50 transition-colors"
+              >
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  className="bg-transparent px-4 py-2 text-xs text-white placeholder-slate-500 focus:outline-none w-full"
+                />
+                <button
+                  type="submit"
+                  className="p-2.5 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white transition-colors shrink-0"
+                  aria-label="Subscribe"
+                >
+                  <FontAwesomeIcon icon={faArrowRight} className="w-3 h-3" />
+                </button>
+              </form>
+            </div>
           </div>
 
-          {/* Link columns */}
-          {FOOTER_LINKS.map((col) => (
-            <div key={col.title}>
-              <h5
-                className={[
-                  "font-mono text-xs uppercase tracking-widest mb-4",
-                  theme.text.muted,
-                ].join(" ")}
-              >
-                {col.title}
-              </h5>
-              <ul className="space-y-1">
-                {col.links.map((link) => (
-                  <li key={link.label}>
-                    <a
-                      href={link.href}
-                      className={[
-                        "block text-sm py-1 transition-colors duration-200",
-                        theme.text.secondary,
-                        "hover:text-indigo-500",
-                      ].join(" ")}
-                    >
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {/* Column 1: Product */}
+          <div>
+            <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-4">
+              Product
+            </h4>
+            <ul className="space-y-2.5 text-xs font-medium">
+              <li>
+                <a
+                  href="#features"
+                  className="hover:text-indigo-300 transition-colors"
+                >
+                  Features
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#demo"
+                  className="hover:text-indigo-300 transition-colors"
+                >
+                  Interactive Demo
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#pricing"
+                  className="hover:text-indigo-300 transition-colors"
+                >
+                  Pricing Plans
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#kanji"
+                  className="hover:text-indigo-300 transition-colors"
+                >
+                  Kanji Tracing Mode
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column 2: Resources */}
+          <div>
+            <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-4">
+              Resources
+            </h4>
+            <ul className="space-y-2.5 text-xs font-medium">
+              <li>
+                <a
+                  href="#blog"
+                  className="hover:text-indigo-300 transition-colors"
+                >
+                  Learning Guide
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#srs"
+                  className="hover:text-indigo-300 transition-colors"
+                >
+                  Spaced Repetition Science
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#anki"
+                  className="hover:text-indigo-300 transition-colors"
+                >
+                  Anki Importer
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#community"
+                  className="hover:text-indigo-300 transition-colors"
+                >
+                  Community Decks
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column 3: Company */}
+          <div>
+            <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-4">
+              Legal & Support
+            </h4>
+            <ul className="space-y-2.5 text-xs font-medium">
+              <li>
+                <a
+                  href="#terms"
+                  className="hover:text-indigo-300 transition-colors"
+                >
+                  Terms of Service
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#privacy"
+                  className="hover:text-indigo-300 transition-colors"
+                >
+                  Privacy Policy
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#cookies"
+                  className="hover:text-indigo-300 transition-colors"
+                >
+                  Cookie Settings
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#support"
+                  className="hover:text-indigo-300 transition-colors"
+                >
+                  Contact Support
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
 
-        {/* Bottom bar */}
-        <div
-          className={[
-            "flex flex-wrap justify-between items-center gap-3 pt-6 border-t text-xs",
-            theme.border.muted,
-            theme.text.muted,
-          ].join(" ")}
-        >
-          <span>© 2026 Revu. All rights reserved.</span>
-          <span className="font-mono">
-            Made for people who keep forgetting 的 the same character.
-          </span>
+        {/* Bottom Bar: Copyright & Socials */}
+        <div className="pt-8 border-t border-slate-800/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+          <p>© {new Date().getFullYear()} REVU App. All rights reserved.</p>
+
+          <div className="flex items-center space-x-4 text-slate-400">
+            <a
+              href="https://twitter.com"
+              target="_blank"
+              rel="noreferrer"
+              className="p-2 rounded-full bg-slate-900 border border-slate-800 hover:text-indigo-400 hover:border-slate-700 transition-colors"
+              aria-label="Twitter"
+            >
+              <FontAwesomeIcon icon={faTwitter} className="w-4 h-4" />
+            </a>
+            <a
+              href="https://github.com"
+              target="_blank"
+              rel="noreferrer"
+              className="p-2 rounded-full bg-slate-900 border border-slate-800 hover:text-indigo-400 hover:border-slate-700 transition-colors"
+              aria-label="GitHub"
+            >
+              <FontAwesomeIcon icon={faGithub} className="w-4 h-4" />
+            </a>
+            <a
+              href="https://discord.com"
+              target="_blank"
+              rel="noreferrer"
+              className="p-2 rounded-full bg-slate-900 border border-slate-800 hover:text-indigo-400 hover:border-slate-700 transition-colors"
+              aria-label="Discord"
+            >
+              <FontAwesomeIcon icon={faDiscord} className="w-4 h-4" />
+            </a>
+          </div>
         </div>
       </div>
     </footer>

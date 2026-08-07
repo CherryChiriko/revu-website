@@ -13,6 +13,10 @@ export const themes = {
     textHover: "hover:text-slate-900",
     textMuted: "text-slate-400",
     textAccent: "text-indigo-600",
+    textHighlight: `relative inline-block bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent pb-3 pt-1 px-2 -mb-3 -mt-1 -mx-2 leading-normal
+      drop-shadow(0px 0px 2px rgba(255, 255, 255, 0.8))
+      drop-shadow(0px 0px 14px rgba(255, 255, 255, 0.35))
+      drop-shadow(0px 0px 28px rgba(129, 140, 248, 0.3))`,
 
     // Interactive & Focus States
     ring: {
@@ -49,6 +53,10 @@ export const themes = {
     textHover: "hover:text-white",
     textMuted: "text-[#f3ede0]/40",
     textAccent: "text-indigo-400",
+    textHighlight: `relative inline-block bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent pb-3 pt-1 px-2 -mb-3 -mt-1 -mx-2 leading-normal
+      drop-shadow(0px 1px 3px rgba(30, 27, 75, 0.18))
+      drop-shadow(0px 4px 12px rgba(99, 102, 241, 0.15))
+    `,
 
     // Interactive & Focus States
     ring: {

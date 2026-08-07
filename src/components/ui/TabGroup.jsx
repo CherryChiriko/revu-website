@@ -30,20 +30,6 @@ export default function TabGroup({
             className={[
               "px-5 py-2.5 rounded-full text-sm font-semibold border transition-all duration-200",
               "focus:outline-none focus:ring-2 focus:ring-offset-2",
-              theme.ring.focus,
-              isActive
-                ? [
-                    theme.background.app,
-                    theme.text.activeButton,
-                    "border-transparent",
-                  ].join(" ")
-                : [
-                    theme.background.card,
-                    theme.text.secondary,
-                    theme.border.muted,
-                    theme.link.hoverBg,
-                    theme.link.hoverText,
-                  ].join(" "),
             ].join(" ")}
             aria-selected={isActive}
             role="tab"

@@ -6,7 +6,6 @@ import Hero from "./components/sections/Hero";
 import HowItWorks from "./components/sections/HowItWorks";
 import Screenshots from "./components/sections/Screenshots";
 import Features from "./components/sections/Features";
-import Testimonial from "./components/sections/Testimonial";
 import Pricing from "./components/sections/Pricing";
 import FAQ from "./components/sections/FAQ";
 import FinalCTA from "./components/sections/FinalCTA";
@@ -20,14 +19,14 @@ export default function App() {
       <Background>
         <Navbar />
         <main>
-          <Hero />
-          <HowItWorks />
-          {/* <Screenshots />
+          {/* <Hero /> */}
+          {/* <HowItWorks /> */}
+          {/* <Screenshots /> */}
           <Features />
-          <Testimonial />
-          <Pricing onUpgrade={(plan) => window.openCheckout?.(plan)} />
-          <FAQ />
-          <FinalCTA onStart={() => window.openCheckout?.("pro")} /> */}
+          {/* <Pricing /> */}
+          {/* onUpgrade={(plan) => window.openCheckout?.(plan)} /> */}
+          {/* <FAQ /> */}
+          {/* <FinalCTA onStart={() => window.openCheckout?.("pro")} /> */}
         </main>
         {/* <Footer /> */}
         {/* <CheckoutModal /> */}
