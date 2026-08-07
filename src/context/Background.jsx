@@ -1,6 +1,6 @@
 // src/components/effects/Background.jsx
 import { useRef, useEffect, useCallback } from "react";
-import { useTheme } from "../../context/ThemeContext";
+import { useTheme } from "./ThemeContext";
 
 export default function Background({ children, className = "" }) {
   const canvasRef = useRef(null);

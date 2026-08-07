@@ -6,7 +6,6 @@ import ThemeToggle from "../ui/ThemeToggle";
 
 const NAV_LINKS = [
   { href: "#how", label: "How it works" },
-  { href: "#screens", label: "Inside the app" },
   { href: "#features", label: "Features" },
   { href: "#pricing", label: "Pricing" },
   { href: "#faq", label: "FAQ" },

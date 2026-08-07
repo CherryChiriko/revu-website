@@ -25,7 +25,7 @@ export default function FinalCTA({ onStart }) {
 
           {/* Main Headline */}
           <h2 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-[1.1]">
-            Ready to master new vocabulary{" "}
+            Learn faster{" "}
             <span
               className="bg-gradient-to-r from-indigo-400 via-purple-300 to-pink-400 bg-clip-text text-transparent"
               style={{
@@ -38,17 +38,17 @@ export default function FinalCTA({ onStart }) {
                 `,
               }}
             >
-              WITHOUT THE GRIND?
+              without the burnout
             </span>
           </h2>
 
           {/* Subtitle */}
           <p className="mt-6 text-lg sm:text-xl text-slate-400 leading-relaxed font-normal max-w-2xl">
-            Join thousands of language learners using REVU's smart active recall
-            and stroke tracing to build lifelong recall.
+            Join thousands of learners using Revu's smart spaced repetition to
+            make new vocabulary stick — for good.
           </p>
 
-          {/* Senthora-Style Action Buttons */}
+          {/* Action Buttons */}
           <div className="mt-10 flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
             <button
               onClick={() => onStart?.("pro")}
