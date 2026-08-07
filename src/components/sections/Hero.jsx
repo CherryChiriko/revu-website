@@ -3,6 +3,16 @@ import { useTheme } from "../../context/ThemeContext";
 
 export default function Hero() {
   const t = useTheme();
+  const filter = t.isDark
+    ? `
+      drop-shadow(0px 0px 2px rgba(255, 255, 255, 0.8))
+      drop-shadow(0px 0px 14px rgba(255, 255, 255, 0.35))
+      drop-shadow(0px 0px 28px rgba(129, 140, 248, 0.3))
+    `
+    : `
+      drop-shadow(0px 1px 3px rgba(30, 27, 75, 0.18))
+      drop-shadow(0px 4px 12px rgba(99, 102, 241, 0.15))
+    `;
 
   return (
     <section className="relative min-h-[90vh] flex flex-col justify-center overflow-hidden pt-16 pb-24 select-none">
@@ -11,18 +21,16 @@ export default function Hero() {
 
       <div className="relative mx-auto max-w-[1280px] px-6 md:px-12 flex flex-col items-center text-center z-10">
         {/* Hero Title with Gradient Text & Stroke Outline */}
-        <h1 className="max-w-4xl text-5xl sm:text-7xl lg:text-8xl font-extrabold tracking-tighter leading-[1.05] text-white">
+        <h1
+          className={`max-w-4xl text-5xl sm:text-7xl lg:text-8xl font-extrabold tracking-tighter leading-[1.05] ${t.textPrimary}`}
+        >
           Vocabulary that{" "}
           <span
-            className="bg-gradient-to-r from-indigo-400 via-purple-300 to-pink-400 bg-clip-text text-transparent"
+            className="relative inline-block bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent pb-3 pt-1 px-2 -mb-3 -mt-1 -mx-2 leading-normal"
             style={{
-              filter: `
-        drop-shadow(1px 0px 0px rgba(255, 255, 255, 0.3))
-        drop-shadow(-1px 0px 0px rgba(255, 255, 255, 0.3))
-        drop-shadow(0px 1px 0px rgba(255, 255, 255, 0.3))
-        drop-shadow(0px -1px 0px rgba(255, 255, 255, 0.3))
-        drop-shadow(0 0 18px rgba(129, 140, 248, 0.4))
-      `,
+              filter: t.isDark
+                ? "drop-shadow(0px 0px 2px rgba(255, 255, 255, 0.8)) drop-shadow(0px 0px 14px rgba(255, 255, 255, 0.35))"
+                : "drop-shadow(0px 1px 3px rgba(30, 27, 75, 0.18)) drop-shadow(0px 4px 12px rgba(99, 102, 241, 0.15))",
             }}
           >
             actually sticks.
@@ -40,7 +48,7 @@ export default function Hero() {
         <div className="mt-10 flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
           <a
             href="#pricing"
-            className="group relative w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 rounded-full text-sm font-semibold text-white transition-all duration-300 shadow-[0_0_30px_rgba(124,108,240,0.5)] bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 bg-[length:200%_auto] hover:bg-right hover:scale-[1.02]"
+            className={`group relative w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 rounded-full text-sm font-semibold ${t.textPrimary} transition-all duration-300 shadow-[0_0_30px_rgba(124,108,240,0.5)] bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 bg-[length:200%_auto] hover:bg-right hover:scale-[1.02] ${t.ctaButton}`}
           >
             <span>Start Building Free</span>
             <svg

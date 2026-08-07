@@ -1,7 +1,7 @@
 // src/App.jsx
 import { ThemeProvider } from "./context/ThemeContext";
 import Navbar from "./components/layout/Navbar";
-import SoftGradientBackground from "./components/effects/SoftGradientBackground";
+import Background from "./components/effects/Background";
 import Hero from "./components/sections/Hero";
 import HowItWorks from "./components/sections/HowItWorks";
 import Screenshots from "./components/sections/Screenshots";
@@ -17,12 +17,12 @@ export default function App() {
   return (
     <ThemeProvider defaultTheme="light">
       {/* <div className="min-h-screen transition-colors duration-300 bg-gray-50 dark:bg-gray-900"> */}
-      <SoftGradientBackground>
+      <Background>
         <Navbar />
         <main>
           <Hero />
-          {/* <HowItWorks />
-          <Screenshots />
+          <HowItWorks />
+          {/* <Screenshots />
           <Features />
           <Testimonial />
           <Pricing onUpgrade={(plan) => window.openCheckout?.(plan)} />
@@ -31,7 +31,7 @@ export default function App() {
         </main>
         {/* <Footer /> */}
         {/* <CheckoutModal /> */}
-      </SoftGradientBackground>
+      </Background>
       {/* </div> */}
     </ThemeProvider>
   );

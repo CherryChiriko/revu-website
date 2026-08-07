@@ -12,6 +12,7 @@ export const themes = {
     textSecondary: "text-slate-600",
     textHover: "hover:text-slate-900",
     textMuted: "text-slate-400",
+    textAccent: "text-indigo-600",
 
     // Interactive & Focus States
     ring: {
@@ -20,7 +21,7 @@ export const themes = {
 
     // UI Elements & Cards
     surface: "bg-slate-100/70",
-    surfaceBorder: "border-slate-200",
+    surfaceBorder: "border-slate-500",
 
     // Toggle Specific Tokens
     toggleTrack: "bg-slate-300",
@@ -47,6 +48,7 @@ export const themes = {
     textSecondary: "text-[#f3ede0]/70",
     textHover: "hover:text-white",
     textMuted: "text-[#f3ede0]/40",
+    textAccent: "text-indigo-400",
 
     // Interactive & Focus States
     ring: {
@@ -55,7 +57,7 @@ export const themes = {
 
     // UI Elements & Cards
     surface: "bg-white/5",
-    surfaceBorder: "border-white/10",
+    surfaceBorder: "border-white/40",
 
     // Toggle Specific Tokens
     toggleTrack: "bg-[#7c6cf0]/40",

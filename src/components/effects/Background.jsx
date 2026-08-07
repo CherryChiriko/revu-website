@@ -1,8 +1,8 @@
-// src/components/effects/SoftGradientBackground.jsx
+// src/components/effects/Background.jsx
 import { useRef, useEffect, useCallback } from "react";
 import { useTheme } from "../../context/ThemeContext";
 
-export default function SoftGradientBackground({ children, className = "" }) {
+export default function Background({ children, className = "" }) {
   const canvasRef = useRef(null);
   const mouseRef = useRef({
     x: -1000,
