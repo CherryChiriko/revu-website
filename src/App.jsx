@@ -3,15 +3,15 @@ import Navbar from "./components/layout/Navbar";
 import Background from "./context/Background";
 import Hero from "./components/sections/Hero";
 import HowItWorks from "./components/sections/HowItWorks";
-import Screenshots from "./components/sections/Screenshots";
 import Features from "./components/sections/Features";
 import Pricing from "./components/sections/Pricing";
 import DeckMarketplace from "./components/sections/DeckMarketplace";
-import FAQ from "./components/sections/FAQ";
 import FinalCTA from "./components/sections/FinalCTA";
 import Footer from "./components/layout/Footer";
 import ScrollToTop from "./components/ui/ScrollToTop";
-// hero ok, navbar - not sticky, features - copywrite+themes, finalcta ok, footer ok
+// hero ok, navbar - not sticky, features - ok, finalcta ok, footer ok
+// how it works - to do, pricing - to do, deck marketplace - to do
+// authmodal - to do, pricemodal - to do
 export default function App() {
   return (
     <div className="min-h-screen">
@@ -20,12 +20,10 @@ export default function App() {
         <main>
           {/* <Hero /> */}
           {/* <HowItWorks /> */}
-          {/* <Screenshots /> */}
-          <Features />
+          {/* <Features /> */}
           <Pricing onUpgrade={(plan) => window.openCheckout?.(plan)} />
-          {/* <FAQ /> */}
-          <DeckMarketplace onDownloadDeck={() => openAuth("signup")} />
-          <FinalCTA onStart={() => window.openCheckout?.("pro")} />
+          {/* <DeckMarketplace onDownloadDeck={() => openAuth("signup")} /> */}
+          {/* <FinalCTA onStart={() => window.openCheckout?.("pro")} /> */}
         </main>
         <Footer />
         <ScrollToTop />

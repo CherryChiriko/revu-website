@@ -17,6 +17,7 @@ export const themes = {
     textPrimary: "text-slate-900",
     textSecondary: "text-slate-600",
     textHover: "hover:text-indigo-600",
+    textHoverPrimary: "hover:text-slate-900",
     textMuted: "text-slate-400",
     textAccent: "text-indigo-600",
     textHighlight:
@@ -29,12 +30,22 @@ export const themes = {
     // Standard Cards & Elements
     cardBg: "bg-white/80 backdrop-blur-md shadow-sm shadow-slate-200/50",
     cardBorder: "border-slate-200/80",
-    surface: "bg-slate-100/60 backdrop-blur-sm",
-    surfaceBorder: "border-slate-500/60",
+    surface: "bg-slate-100/80 backdrop-blur-sm",
+    surfaceBorder: "border-slate-500/80",
     inputBg: "bg-white/90",
     inputBorder: "border-slate-300 focus-within:border-indigo-500",
     iconContainer:
       "bg-slate-100 border-slate-200/80 hover:border-indigo-300 hover:text-indigo-600 text-slate-600",
+
+    // Active Segmented Control / Pill Tokens
+    pillActiveBg: "bg-indigo-600 shadow-md shadow-indigo-600/20",
+    pillActiveText: "text-white",
+
+    // Discount / Offer Badge Tokens
+    badgeBg: "bg-emerald-500/15",
+    badgeText: "text-emerald-700",
+    badgeActiveBg: "bg-white/20",
+    badgeActiveText: "text-white",
 
     // Permanent Dark Card Overrides (For high-contrast elements in Light Mode)
     darkCardBg: "bg-slate-900/90 backdrop-blur-md",
@@ -83,6 +94,7 @@ export const themes = {
     textPrimary: "text-slate-100",
     textSecondary: "text-slate-400",
     textHover: "hover:text-indigo-400",
+    textHoverPrimary: "hover:text-slate-100",
     textMuted: "text-slate-500",
     textAccent: "text-indigo-400",
     textHighlight:
@@ -95,12 +107,22 @@ export const themes = {
     // Standard Cards & Elements
     cardBg: "bg-slate-900/60 backdrop-blur-md shadow-xl shadow-black/20",
     cardBorder: "border-slate-800/80",
-    surface: "bg-slate-900/40 backdrop-blur-sm",
-    surfaceBorder: "border-slate-300/60",
+    surface: "bg-slate-900/60 backdrop-blur-sm",
+    surfaceBorder: "border-slate-200/80",
     inputBg: "bg-slate-900/80",
     inputBorder: "border-slate-800 focus-within:border-indigo-500/50",
     iconContainer:
       "bg-slate-900/80 border-slate-800 hover:text-indigo-400 hover:border-slate-700 text-slate-400",
+
+    // Active Segmented Control / Pill Tokens
+    pillActiveBg: "bg-indigo-500 shadow-md shadow-indigo-950",
+    pillActiveText: "text-white",
+
+    // Discount / Offer Badge Tokens
+    badgeBg: "bg-emerald-500/20",
+    badgeText: "text-emerald-400",
+    badgeActiveBg: "bg-white/20",
+    badgeActiveText: "text-white",
 
     // Permanent Dark Card Tokens
     darkCardBg: "bg-slate-900/80 backdrop-blur-md",

@@ -1,3 +1,4 @@
+// src/components/sections/Features.jsx
 import React from "react";
 import { useTheme } from "../../context/ThemeContext";
 import { featuresData } from "../data/featuresData";
@@ -7,7 +8,10 @@ export default function Features() {
   const theme = useTheme();
 
   return (
-    <section className="relative py-28 px-6 max-w-7xl mx-auto overflow-hidden select-none">
+    <section
+      id="features"
+      className="relative py-28 px-6 max-w-7xl mx-auto overflow-hidden select-none"
+    >
       {/* Background Ambient Glow */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-indigo-600/10 blur-[140px] pointer-events-none rounded-full" />
 
@@ -28,7 +32,7 @@ export default function Features() {
         </p>
       </div>
 
-      {/* Bento Grid Layout */}
+      {/* Asymmetric Bento Grid Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {featuresData.map((feature) => (
           <Card key={feature.id} feature={feature} />

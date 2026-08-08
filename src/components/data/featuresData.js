@@ -1,12 +1,14 @@
+// src/data/featuresData.js
 import {
   faBrain,
   faChartLine,
   faPenFancy,
-  faVolumeHigh,
+  faFire,
   faLayerGroup,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 
-const featuresData = [
+export const featuresData = [
   {
     id: "active-recall",
     icon: faBrain,
@@ -30,39 +32,47 @@ const featuresData = [
     borderColor: "group-hover:border-purple-500/40",
   },
   {
+    id: "streak",
+    icon: faFire,
+    badge: "Streak",
+    title: "Streak Protection",
+    description:
+      "Revu freezes your streak when there isn't meaningful work available, instead of punishing you for it. Your habit stays intact.",
+    gradient: "from-amber-500/10 via-orange-500/5 to-transparent",
+    accentColor: "text-orange-400",
+    borderColor: "group-hover:border-orange-500/40",
+  },
+  {
     id: "writing-mode",
     icon: faPenFancy,
     badge: "Writing Mode",
-    title: "Hanzi & Kanji Tracing",
+    title: "Character Support",
     description:
-      "Master stroke order with embedded canvas tracing. Receive immediate stroke accuracy feedback for native writing precision.",
+      "Master characters by practicing stroke order with our interactive tracing canvas. Receive immediate accuracy feedback.",
     gradient: "from-pink-500/10 via-rose-500/5 to-transparent",
     accentColor: "text-pink-400",
     borderColor: "group-hover:border-pink-500/40",
   },
-  //   {
-  //     id: "audio-playback",
-  //     icon: faVolumeHigh,
-  //     badge: "Audio & Pronunciation",
-  //     title: "Native Voice Playback",
-  //     description:
-  //       "Listen to high-definition native pronunciations for thousands of characters and words to refine accent and ear training.",
-  //     colSpan: "lg:col-span-4",
-  //     gradient: "from-blue-500/10 via-indigo-500/5 to-transparent",
-  //     accentColor: "text-blue-400",
-  //     borderColor: "group-hover:border-blue-500/40",
-  //   },
   {
-    id: "custom-deck",
+    id: "import-deck",
     icon: faLayerGroup,
-    badge: "Organization",
-    title: "Custom Deck Architect",
+    badge: "Import",
+    title: "Deck Import",
     description:
-      "Organize terminology by topics, tags, or difficulty tiers. Import and export custom flashcard decks in seconds.",
+      "Import from CSV or Excel, map columns, build decks or merge instantly with automatic data validation before it hits a card.",
     gradient: "from-cyan-500/10 via-teal-500/5 to-transparent",
     accentColor: "text-cyan-400",
     borderColor: "group-hover:border-cyan-500/40",
   },
+  {
+    id: "user-settings",
+    icon: faUser,
+    badge: "Personalization",
+    title: "Custom Settings & Cockpit Controls",
+    description:
+      "Adjust autoflip timing, character animation speed, daily review caps, themes, and avatars to match your personal learning pace.",
+    gradient: "from-emerald-500/10 via-teal-500/5 to-transparent",
+    accentColor: "text-emerald-400",
+    borderColor: "group-hover:border-emerald-500/40",
+  },
 ];
-
-export { featuresData };

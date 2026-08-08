@@ -4,6 +4,7 @@ import { faCheck, faBolt } from "@fortawesome/free-solid-svg-icons";
 import { plans } from "../data/pricesData";
 import { useTheme } from "../../context/ThemeContext";
 import PaymentModal from "../modals/PaymentModal";
+import SegmentedControl from "../ui/SegmentedControl";
 
 export default function Pricing({ onUpgrade }) {
   const [paymentModal, setPaymentModal] = useState({
@@ -44,32 +45,15 @@ export default function Pricing({ onUpgrade }) {
         </p>
 
         {/* Monthly / Annual Billing Toggle */}
-        <div
-          className={`mt-8 inline-flex items-center p-1.5 rounded-full border ${theme.surfaceBorder} ${theme.surface} backdrop-blur-md`}
-        >
-          <button
-            onClick={() => setIsAnnual(false)}
-            className={`px-5 py-2 rounded-full text-xs font-bold transition-all duration-200 ${
-              !isAnnual
-                ? "bg-indigo-600 text-white shadow-md"
-                : `${theme.textSecondary} hover:${theme.textPrimary}`
-            }`}
-          >
-            Monthly
-          </button>
-          <button
-            onClick={() => setIsAnnual(true)}
-            className={`flex items-center space-x-2 px-5 py-2 rounded-full text-xs font-bold transition-all duration-200 ${
-              isAnnual
-                ? "bg-indigo-600 text-white shadow-md"
-                : `${theme.textSecondary} hover:${theme.textPrimary}`
-            }`}
-          >
-            <span>Annual</span>
-            <span className="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-500 dark:text-emerald-300 text-[10px] font-extrabold">
-              Save 33%
-            </span>
-          </button>
+        <div className="mt-8 flex justify-center">
+          <SegmentedControl
+            value={isAnnual ? "annual" : "monthly"}
+            onChange={(val) => setIsAnnual(val === "annual")}
+            options={[
+              { value: "monthly", label: "Monthly" },
+              { value: "annual", label: "Annual", badge: "Save 33%" },
+            ]}
+          />
         </div>
       </div>
 
