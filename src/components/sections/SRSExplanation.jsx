@@ -4,7 +4,6 @@ import {
   faBrain,
   faClockHistory,
   faChartLine,
-  faSparkles,
 } from "@fortawesome/free-solid-svg-icons";
 import { useTheme } from "../../context/ThemeContext";
 
@@ -45,14 +44,6 @@ export default function SRSExplanation() {
 
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto mb-16">
-        <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-300 text-xs font-semibold uppercase tracking-widest mb-4">
-          <FontAwesomeIcon
-            icon={faSparkles}
-            className="w-3 h-3 text-indigo-400"
-          />
-          <span>Cognitive Science Backed</span>
-        </div>
-
         <h2
           className={`text-4xl sm:text-6xl font-extrabold ${theme.textPrimary} tracking-tight leading-[1.1]`}
         >

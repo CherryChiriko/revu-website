@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark, faSparkles } from "@fortawesome/free-solid-svg-icons";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { faGoogle, faGithub } from "@fortawesome/free-brands-svg-icons";
 import { useTheme } from "../../context/ThemeContext";
 
@@ -41,7 +41,6 @@ export default function AuthModal({ isOpen, onClose, initialMode = "signup" }) {
         {/* Modal Header */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-400 text-xs font-semibold uppercase tracking-widest mb-3">
-            <FontAwesomeIcon icon={faSparkles} className="w-3 h-3" />
             <span>REVU Account</span>
           </div>
           <h3 className="text-2xl font-bold tracking-tight">

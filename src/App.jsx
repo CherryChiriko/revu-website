@@ -1,4 +1,4 @@
-// src/App.jsx
+import React, { useState } from "react";
 import { ThemeProvider } from "./context/ThemeContext";
 import Navbar from "./components/layout/Navbar";
 import Background from "./context/Background";
@@ -7,10 +7,10 @@ import HowItWorks from "./components/sections/HowItWorks";
 import Screenshots from "./components/sections/Screenshots";
 import Features from "./components/sections/Features";
 import Pricing from "./components/sections/Pricing";
+import DeckMarketplace from "./components/sections/DeckMarketplace";
 import FAQ from "./components/sections/FAQ";
 import FinalCTA from "./components/sections/FinalCTA";
 import Footer from "./components/layout/Footer";
-import CheckoutModal from "./components/modals/CheckoutModal";
 import ScrollToTop from "./components/ui/ScrollToTop";
 import AuthModal from "./components/modals/AuthModal";
 // hero ok, navbar - not sticky, features - copywrite+themes, finalcta ok, footer ok
@@ -19,9 +19,9 @@ export default function App() {
 
   const openAuth = (mode = "signup") => setAuthModal({ isOpen: true, mode });
   const closeAuth = () => setAuthModal({ isOpen: false, mode: "signup" });
+
   return (
-    <ThemeProvider defaultTheme="light">
-      {/* <div className="min-h-screen transition-colors duration-300 bg-gray-50 dark:bg-gray-900"> */}
+    <ThemeProvider>
       <Background>
         <Navbar onOpenAuth={openAuth} />
         <main>
@@ -41,9 +41,7 @@ export default function App() {
         </main>
         <Footer />
         <ScrollToTop />
-        {/* <CheckoutModal /> */}
       </Background>
-      {/* </div> */}
     </ThemeProvider>
   );
 }

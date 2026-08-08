@@ -3,8 +3,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faBolt } from "@fortawesome/free-solid-svg-icons";
 import { plans } from "../data/pricesData";
 import { useTheme } from "../../context/ThemeContext";
+import PaymentModal from "../modals/PaymentModal";
 
 export default function Pricing({ onUpgrade }) {
+  const [paymentModal, setPaymentModal] = useState({
+    isOpen: false,
+    plan: null,
+  });
+
+  const handleOpenPayment = (plan) => {
+    setPaymentModal({ isOpen: true, plan });
+  };
   const [isAnnual, setIsAnnual] = useState(true);
   const theme = useTheme();
 
@@ -22,7 +31,9 @@ export default function Pricing({ onUpgrade }) {
           className={`text-4xl sm:text-6xl font-extrabold tracking-tight leading-[1.1] ${theme.textPrimary}`}
         >
           Invest in your{" "}
-          <span className={theme.textHighlight}>permanent memory.</span>
+          <span className={`${theme.textHighlight} block`}>
+            permanent memory.
+          </span>
         </h2>
 
         <p
@@ -162,6 +173,11 @@ export default function Pricing({ onUpgrade }) {
           );
         })}
       </div>
+      <PaymentModal
+        isOpen={paymentModal.isOpen}
+        selectedPlan={paymentModal.plan}
+        onClose={() => setPaymentModal({ isOpen: false, plan: null })}
+      />
     </section>
   );
 }
