@@ -108,7 +108,7 @@ export const themes = {
     cardBg: "bg-slate-900/60 backdrop-blur-md shadow-xl shadow-black/20",
     cardBorder: "border-slate-800/80",
     surface: "bg-slate-900/60 backdrop-blur-sm",
-    surfaceBorder: "border-slate-200/80",
+    surfaceBorder: "border-slate-500/80",
     inputBg: "bg-slate-900/80",
     inputBorder: "border-slate-800 focus-within:border-indigo-500/50",
     iconContainer:

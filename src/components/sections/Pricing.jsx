@@ -1,3 +1,4 @@
+// src/components/Pricing.jsx
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faBolt } from "@fortawesome/free-solid-svg-icons";
@@ -62,14 +63,15 @@ export default function Pricing({ onUpgrade }) {
         {plans.map((plan) => {
           const currentPrice = isAnnual ? plan.priceAnnual : plan.priceMonthly;
 
+          // Unified theme handling across both normal and highlighted cards
+          const cardBgClass = plan.highlighted
+            ? `${theme.cardBg} border-2 border-indigo-500 shadow-2xl shadow-indigo-500/20 lg:-translate-y-2`
+            : `${theme.cardBg} border ${theme.cardBorder} hover:border-indigo-500/30`;
+
           return (
             <div
               key={plan.id}
-              className={`relative rounded-3xl p-8 backdrop-blur-xl transition-all duration-300 flex flex-col justify-between overflow-hidden ${
-                plan.highlighted
-                  ? "bg-slate-900/90 border-2 border-indigo-500 shadow-[0_0_50px_rgba(99,102,241,0.25)] lg:-translate-y-2"
-                  : "bg-slate-950/60 border border-slate-800/80 hover:border-slate-700"
-              }`}
+              className={`relative rounded-3xl p-8 backdrop-blur-xl transition-all duration-300 flex flex-col justify-between overflow-hidden ${cardBgClass}`}
             >
               {/* Top Highlight Gradient Accent */}
               {plan.highlighted && (
@@ -85,7 +87,7 @@ export default function Pricing({ onUpgrade }) {
                   <span
                     className={`text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full border ${
                       plan.highlighted
-                        ? "bg-indigo-500/20 border-indigo-500/40 text-indigo-500 dark:text-indigo-300"
+                        ? "bg-indigo-500/10 border-indigo-500/30 text-indigo-600 dark:text-indigo-400"
                         : `${theme.surface} ${theme.surfaceBorder} ${theme.textSecondary}`
                     }`}
                   >
@@ -126,10 +128,16 @@ export default function Pricing({ onUpgrade }) {
                         key={idx}
                         className={`flex items-center space-x-3 text-sm ${theme.textSecondary}`}
                       >
-                        <div className="shrink-0 w-4 h-4 rounded-full bg-indigo-500/20 flex items-center justify-center border border-indigo-500/40">
+                        <div
+                          className={`shrink-0 w-4 h-4 rounded-full flex items-center justify-center border ${
+                            plan.highlighted
+                              ? "bg-indigo-500/15 border-indigo-500/30"
+                              : "bg-indigo-500/10 border-indigo-500/20"
+                          }`}
+                        >
                           <FontAwesomeIcon
                             icon={faCheck}
-                            className="w-2.5 h-2.5 text-indigo-500 dark:text-indigo-300"
+                            className={`w-2.5 h-2.5 ${theme.textAccent}`}
                           />
                         </div>
                         <span>{feature}</span>
@@ -157,6 +165,7 @@ export default function Pricing({ onUpgrade }) {
           );
         })}
       </div>
+
       <PaymentModal
         isOpen={paymentModal.isOpen}
         selectedPlan={paymentModal.plan}
