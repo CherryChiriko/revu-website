@@ -1,74 +1,12 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faBolt } from "@fortawesome/free-solid-svg-icons";
+import { plans } from "../data/pricesData";
+import { useTheme } from "../../context/ThemeContext";
 
 export default function Pricing({ onUpgrade }) {
   const [isAnnual, setIsAnnual] = useState(true);
-
-  const plans = [
-    {
-      id: "free",
-      name: "Starter",
-      description:
-        "Essential active recall tools for casual vocabulary learners.",
-      priceMonthly: "$0",
-      priceAnnual: "$0",
-      period: "forever",
-      badge: "Free Plan",
-      highlighted: false,
-      ctaText: "Start Learning Free",
-      ctaVariant: "secondary",
-      features: [
-        "Up to 3 active decks",
-        "Standard flip-card mode",
-        "Basic spaced repetition",
-        "Audio pronunciations",
-        "Community support",
-      ],
-    },
-    {
-      id: "pro",
-      name: "Pro Learner",
-      description:
-        "Unlocks Kanji tracing, custom intervals, and unlimited decks.",
-      priceMonthly: "$9",
-      priceAnnual: "$6",
-      period: "per month",
-      badge: "Most Popular",
-      highlighted: true,
-      ctaText: "Start 14-Day Free Trial",
-      ctaVariant: "primary",
-      features: [
-        "Unlimited custom decks",
-        "Full Hanzi & Kanji stroke tracing",
-        "Advanced Spaced Repetition algorithms",
-        "HD native audio playback",
-        "Detailed performance analytics",
-        "CSV / Anki deck importer",
-        "Priority support",
-      ],
-    },
-    {
-      id: "lifetime",
-      name: "Lifetime Access",
-      description:
-        "Pay once for unlimited access to all current and future features.",
-      priceMonthly: "$149",
-      priceAnnual: "$149",
-      period: "one-time payment",
-      badge: "Best Value",
-      highlighted: false,
-      ctaText: "Get Lifetime Access",
-      ctaVariant: "secondary",
-      features: [
-        "Everything in Pro Learner",
-        "Lifetime platform updates",
-        "Early access to new features",
-        "Offline study export",
-        "Dedicated VIP support",
-      ],
-    },
-  ];
+  const theme = useTheme();
 
   return (
     <section
@@ -79,46 +17,31 @@ export default function Pricing({ onUpgrade }) {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-indigo-600/10 blur-[150px] pointer-events-none rounded-full" />
 
       {/* Header */}
-      <div className="text-center max-w-3xl mx-auto mb-12">
-        <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-300 text-xs font-semibold uppercase tracking-widest mb-4">
-          <FontAwesomeIcon
-            // icon={faSparkles}
-            className="w-3 h-3 text-indigo-400"
-          />
-          <span>Simple, Transparent Pricing</span>
-        </div>
-
-        <h2 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-[1.1]">
+      <div className="text-center max-w-3xl mx-auto mb-16">
+        <h2
+          className={`text-4xl sm:text-6xl font-extrabold tracking-tight leading-[1.1] ${theme.textPrimary}`}
+        >
           Invest in your{" "}
-          <span
-            className="bg-gradient-to-r from-indigo-400 via-purple-300 to-pink-400 bg-clip-text text-transparent"
-            style={{
-              filter: `
-                drop-shadow(1px 0px 0px rgba(255, 255, 255, 0.3))
-                drop-shadow(-1px 0px 0px rgba(255, 255, 255, 0.3))
-                drop-shadow(0px 1px 0px rgba(255, 255, 255, 0.3))
-                drop-shadow(0px -1px 0px rgba(255, 255, 255, 0.3))
-                drop-shadow(0 0 16px rgba(129, 140, 248, 0.35))
-              `,
-            }}
-          >
-            PERMANENT MEMORY.
-          </span>
+          <span className={theme.textHighlight}>permanent memory.</span>
         </h2>
 
-        <p className="mt-4 text-lg text-slate-400">
+        <p
+          className={`mt-6 text-lg sm:text-xl leading-relaxed font-normal ${theme.textSecondary}`}
+        >
           Start for free, upgrade when you need advanced writing tracing and
           analytics.
         </p>
 
         {/* Monthly / Annual Billing Toggle */}
-        <div className="mt-8 inline-flex items-center p-1.5 rounded-full border border-slate-800 bg-slate-900/80 backdrop-blur-md">
+        <div
+          className={`mt-8 inline-flex items-center p-1.5 rounded-full border ${theme.surfaceBorder} ${theme.surface} backdrop-blur-md`}
+        >
           <button
             onClick={() => setIsAnnual(false)}
             className={`px-5 py-2 rounded-full text-xs font-bold transition-all duration-200 ${
               !isAnnual
                 ? "bg-indigo-600 text-white shadow-md"
-                : "text-slate-400 hover:text-white"
+                : `${theme.textSecondary} hover:${theme.textPrimary}`
             }`}
           >
             Monthly
@@ -128,11 +51,11 @@ export default function Pricing({ onUpgrade }) {
             className={`flex items-center space-x-2 px-5 py-2 rounded-full text-xs font-bold transition-all duration-200 ${
               isAnnual
                 ? "bg-indigo-600 text-white shadow-md"
-                : "text-slate-400 hover:text-white"
+                : `${theme.textSecondary} hover:${theme.textPrimary}`
             }`}
           >
             <span>Annual</span>
-            <span className="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] font-extrabold">
+            <span className="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-500 dark:text-emerald-300 text-[10px] font-extrabold">
               Save 33%
             </span>
           </button>
@@ -161,47 +84,57 @@ export default function Pricing({ onUpgrade }) {
               <div>
                 {/* Header Tag & Badge */}
                 <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-xl font-bold text-white">{plan.name}</h3>
+                  <h3 className={`text-xl font-bold ${theme.textPrimary}`}>
+                    {plan.name}
+                  </h3>
                   <span
                     className={`text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full border ${
                       plan.highlighted
-                        ? "bg-indigo-500/20 border-indigo-500/40 text-indigo-300"
-                        : "bg-slate-900 border-slate-800 text-slate-400"
+                        ? "bg-indigo-500/20 border-indigo-500/40 text-indigo-500 dark:text-indigo-300"
+                        : `${theme.surface} ${theme.surfaceBorder} ${theme.textSecondary}`
                     }`}
                   >
                     {plan.badge}
                   </span>
                 </div>
 
-                <p className="text-xs text-slate-400 leading-relaxed min-h-[36px]">
+                <p
+                  className={`text-xs ${theme.textSecondary} leading-relaxed min-h-[36px]`}
+                >
                   {plan.description}
                 </p>
 
                 {/* Price Display */}
                 <div className="my-6 flex items-baseline space-x-2">
-                  <span className="text-5xl font-extrabold text-white tracking-tight">
+                  <span
+                    className={`text-5xl font-extrabold ${theme.textPrimary} tracking-tight`}
+                  >
                     {currentPrice}
                   </span>
-                  <span className="text-xs text-slate-400 font-medium">
+                  <span
+                    className={`text-xs ${theme.textSecondary} font-medium`}
+                  >
                     / {plan.id === "lifetime" ? "one-time" : plan.period}
                   </span>
                 </div>
 
                 {/* Features List */}
-                <div className="border-t border-slate-800/80 pt-6 mb-8">
-                  <p className="text-xs font-bold text-slate-300 uppercase tracking-wider mb-4">
+                <div className={`border-t ${theme.cardBorder} pt-6 mb-8`}>
+                  <p
+                    className={`text-xs font-bold ${theme.textPrimary} uppercase tracking-wider mb-4`}
+                  >
                     What's included:
                   </p>
                   <ul className="space-y-3">
                     {plan.features.map((feature, idx) => (
                       <li
                         key={idx}
-                        className="flex items-center space-x-3 text-sm text-slate-300"
+                        className={`flex items-center space-x-3 text-sm ${theme.textSecondary}`}
                       >
                         <div className="shrink-0 w-4 h-4 rounded-full bg-indigo-500/20 flex items-center justify-center border border-indigo-500/40">
                           <FontAwesomeIcon
                             icon={faCheck}
-                            className="w-2.5 h-2.5 text-indigo-300"
+                            className="w-2.5 h-2.5 text-indigo-500 dark:text-indigo-300"
                           />
                         </div>
                         <span>{feature}</span>
@@ -217,7 +150,7 @@ export default function Pricing({ onUpgrade }) {
                 className={`w-full py-4 rounded-full text-sm font-semibold transition-all duration-300 flex items-center justify-center space-x-2 ${
                   plan.ctaVariant === "primary"
                     ? "bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 bg-[length:200%_auto] text-white hover:bg-right shadow-[0_0_25px_rgba(124,108,240,0.4)] hover:scale-[1.02]"
-                    : "bg-slate-900 border border-slate-700 text-white hover:bg-slate-800 hover:border-slate-600"
+                    : `${theme.surface} border ${theme.surfaceBorder} ${theme.textPrimary} ${theme.textHover}`
                 }`}
               >
                 <span>{plan.ctaText}</span>

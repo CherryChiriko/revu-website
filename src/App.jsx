@@ -12,20 +12,19 @@ import FinalCTA from "./components/sections/FinalCTA";
 import Footer from "./components/layout/Footer";
 import CheckoutModal from "./components/modals/CheckoutModal";
 import ScrollToTop from "./components/ui/ScrollToTop";
-
+// hero ok, navbar - not sticky, features - copywrite+themes, finalcta ok, footer ok
 export default function App() {
   return (
     <ThemeProvider defaultTheme="light">
       {/* <div className="min-h-screen transition-colors duration-300 bg-gray-50 dark:bg-gray-900"> */}
       <Background>
         <Navbar />
-        <main className="pt-[72px]">
-          {/* <Hero /> */}
+        <main>
+          <Hero />
           {/* <HowItWorks /> */}
           {/* <Screenshots /> */}
-          {/* <Features /> */}
-          {/* <Pricing /> */}
-          {/* onUpgrade={(plan) => window.openCheckout?.(plan)} /> */}
+          <Features />
+          <Pricing onUpgrade={(plan) => window.openCheckout?.(plan)} />
           {/* <FAQ /> */}
           <FinalCTA onStart={() => window.openCheckout?.("pro")} />
         </main>

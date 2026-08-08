@@ -4,46 +4,35 @@ import {
   faArrowRight,
   faShieldHalved,
 } from "@fortawesome/free-solid-svg-icons";
+import { useTheme } from "../../context/ThemeContext";
 
 export default function FinalCTA({ onStart }) {
+  const theme = useTheme();
+
   return (
-    <section className="relative py-28 px-6 max-w-7xl mx-auto overflow-hidden select-none">
-      {/* Outer Card Container */}
-      <div className="relative rounded-3xl border border-slate-800/80 bg-slate-950/80 p-10 md:p-20 text-center overflow-hidden backdrop-blur-xl shadow-2xl">
-        {/* Central Background Glow Atmosphere */}
+    <section className="relative py-20 px-6 max-w-7xl mx-auto overflow-hidden select-none">
+      {/* Outer Card Container using permanent dark theme tokens */}
+      <div
+        className={`relative rounded-3xl border ${theme.darkCardBorder} ${theme.darkCardBg} p-10 md:p-20 text-center overflow-hidden backdrop-blur-xl shadow-2xl transition-all duration-300`}
+      >
+        {/* Central Ambient Glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-gradient-to-tr from-indigo-600/25 via-purple-600/20 to-pink-500/0 blur-[120px] pointer-events-none rounded-full" />
 
         <div className="relative z-10 max-w-3xl mx-auto flex flex-col items-center">
-          {/* Top Pill Tag */}
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-300 text-xs font-semibold uppercase tracking-widest mb-6">
-            <FontAwesomeIcon
-              // icon={faSparkles}
-              className="w-3 h-3 text-indigo-400"
-            />
-            <span>Start Building Permanent Memory</span>
-          </div>
-
           {/* Main Headline */}
-          <h2 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-[1.1]">
+          <h2
+            className={`text-4xl sm:text-6xl font-extrabold ${theme.darkTextPrimary} tracking-tight leading-[1.1]`}
+          >
             Learn faster{" "}
-            <span
-              className="bg-gradient-to-r from-indigo-400 via-purple-300 to-pink-400 bg-clip-text text-transparent"
-              style={{
-                filter: `
-                  drop-shadow(1px 0px 0px rgba(255, 255, 255, 0.3))
-                  drop-shadow(-1px 0px 0px rgba(255, 255, 255, 0.3))
-                  drop-shadow(0px 1px 0px rgba(255, 255, 255, 0.3))
-                  drop-shadow(0px -1px 0px rgba(255, 255, 255, 0.3))
-                  drop-shadow(0 0 16px rgba(129, 140, 248, 0.35))
-                `,
-              }}
-            >
+            <span className={`block ${theme.textHighlight}`}>
               without the burnout
             </span>
           </h2>
 
           {/* Subtitle */}
-          <p className="mt-6 text-lg sm:text-xl text-slate-400 leading-relaxed font-normal max-w-2xl">
+          <p
+            className={`mt-6 text-lg sm:text-xl ${theme.darkTextSecondary} leading-relaxed font-normal max-w-2xl`}
+          >
             Join thousands of learners using Revu's smart spaced repetition to
             make new vocabulary stick — for good.
           </p>
@@ -63,14 +52,16 @@ export default function FinalCTA({ onStart }) {
 
             <a
               href="#pricing"
-              className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 rounded-full text-sm font-medium border border-slate-800 bg-slate-900/60 backdrop-blur-md text-white transition-all duration-200 hover:bg-slate-800 hover:border-slate-700"
+              className={`w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 rounded-full text-sm font-medium border ${theme.darkSurfaceBorder} ${theme.darkSurface} ${theme.darkTextPrimary} backdrop-blur-md transition-all duration-200 ${theme.darkSurfaceHover}`}
             >
               View Pricing & Plans
             </a>
           </div>
 
           {/* Trust Badges / Guarantees */}
-          <div className="mt-8 flex items-center space-x-6 text-xs text-slate-500 font-medium">
+          <div
+            className={`mt-8 flex flex-wrap items-center justify-center gap-2 sm:gap-6 text-xs ${theme.darkTextSecondary} font-medium`}
+          >
             <div className="flex items-center space-x-1.5">
               <FontAwesomeIcon
                 icon={faShieldHalved}

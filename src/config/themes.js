@@ -1,13 +1,17 @@
+// src/config/themes.js
 export const themes = {
   light: {
     isDark: false,
 
     // Page & Navigation Surfaces
-    navBg: "bg-white/85",
-    navBorder: "border-slate-200/80",
+    navBg: "bg-white/70 backdrop-blur-md",
+    navBorder: "border-slate-200/60",
     pageBg: "bg-slate-50",
-    footerBg: "bg-slate-100/90",
-    footerBorder: "border-slate-200",
+    footerBg: "bg-slate-100/80 backdrop-blur-sm",
+    footerBorder: "border-slate-200/80",
+
+    // Backward compatibility alias
+    bg: "bg-slate-50",
 
     // Typography
     textPrimary: "text-slate-900",
@@ -15,82 +19,116 @@ export const themes = {
     textHover: "hover:text-indigo-600",
     textMuted: "text-slate-400",
     textAccent: "text-indigo-600",
-    textHighlight: `relative inline-block bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent pb-3 pt-1 px-2 -mb-3 -mt-1 -mx-2 leading-normal
-      drop-shadow(0px 0px 2px rgba(255, 255, 255, 0.8))
-      drop-shadow(0px 0px 14px rgba(255, 255, 255, 0.35))
-      drop-shadow(0px 0px 28px rgba(129, 140, 248, 0.3))`,
+    textHighlight:
+      "bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent",
 
     // Interactive & Focus States
-    ring: {
-      focus: "focus:ring-indigo-500 focus:ring-offset-slate-50",
-    },
+    ringFocus:
+      "focus:ring-2 focus:ring-indigo-500/40 focus:ring-offset-2 focus:ring-offset-slate-50",
 
-    // UI Elements & Cards
-    surface: "bg-slate-100/70",
-    surfaceBorder: "border-slate-200",
-    inputBg: "bg-white",
+    // Standard Cards & Elements
+    cardBg: "bg-white/80 backdrop-blur-md shadow-sm shadow-slate-200/50",
+    cardBorder: "border-slate-200/80",
+    surface: "bg-slate-100/60 backdrop-blur-sm",
+    surfaceBorder: "border-slate-500/60",
+    inputBg: "bg-white/90",
     inputBorder: "border-slate-300 focus-within:border-indigo-500",
     iconContainer:
-      "bg-slate-200/60 border-slate-300 hover:border-indigo-400 hover:text-indigo-600",
+      "bg-slate-100 border-slate-200/80 hover:border-indigo-300 hover:text-indigo-600 text-slate-600",
+
+    // Permanent Dark Card Overrides (For high-contrast elements in Light Mode)
+    darkCardBg: "bg-slate-900/90 backdrop-blur-md",
+    darkCardBorder: "border-slate-800",
+    darkTextPrimary: "text-white",
+    darkTextSecondary: "text-slate-400",
+    darkSurface: "bg-slate-800/50",
+    darkSurfaceBorder: "border-slate-700/60",
+    darkSurfaceHover: "hover:bg-slate-800 hover:border-slate-700",
 
     // Toggle Specific Tokens
-    toggleTrack: "bg-slate-300",
-    toggleThumb: "bg-white",
+    toggleTrack: "bg-slate-200 hover:bg-slate-300 border border-slate-300/60",
+    toggleThumb: "bg-white shadow-sm",
     toggleIcon: "text-amber-500",
 
     // Brand Gradients, Accents & Buttons
     brandGlyph: "from-indigo-600 to-violet-600",
     linkUnderline: "bg-indigo-600",
     linkUnderlineHex: "#4f46e5",
-    ctaButton: "bg-slate-900 hover:bg-slate-800 text-white shadow-slate-900/10",
-    primaryButton: "bg-indigo-600 hover:bg-indigo-500 text-white",
+
+    // Canvas Background Blob Palette
+    gradientColors: [
+      "#a5b4fc",
+      "#c084fc",
+      "#f0abfc",
+      "#38bdf8",
+      "#818cf8",
+      "#f472b6",
+    ],
   },
 
   dark: {
     isDark: true,
 
     // Page & Navigation Surfaces
-    navBg: "bg-[#0b0a10]/80",
-    navBorder: "border-white/10",
-    pageBg: "bg-[#0b0a10]",
-    footerBg: "bg-[#0b0a10]/90",
-    footerBorder: "border-slate-800/80",
+    navBg: "bg-slate-950/70 backdrop-blur-md",
+    navBorder: "border-slate-800/60",
+    pageBg: "bg-slate-950",
+    footerBg: "bg-slate-950/80 backdrop-blur-sm",
+    footerBorder: "border-slate-800/60",
+
+    // Backward compatibility alias
+    bg: "bg-slate-950",
 
     // Typography
-    textPrimary: "text-[#f3ede0]",
-    textSecondary: "text-[#f3ede0]/70",
-    textHover: "hover:text-indigo-300",
-    textMuted: "text-[#f3ede0]/40",
+    textPrimary: "text-slate-100",
+    textSecondary: "text-slate-400",
+    textHover: "hover:text-indigo-400",
+    textMuted: "text-slate-500",
     textAccent: "text-indigo-400",
-    textHighlight: `relative inline-block bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent pb-3 pt-1 px-2 -mb-3 -mt-1 -mx-2 leading-normal
-      drop-shadow(0px 1px 3px rgba(30, 27, 75, 0.18))
-      drop-shadow(0px 4px 12px rgba(99, 102, 241, 0.15))
-    `,
+    textHighlight:
+      "bg-gradient-to-r from-indigo-400 via-purple-300 to-pink-400 bg-clip-text text-transparent",
 
     // Interactive & Focus States
-    ring: {
-      focus: "focus:ring-[#a99df5] focus:ring-offset-[#0b0a10]",
-    },
+    ringFocus:
+      "focus:ring-2 focus:ring-indigo-400/40 focus:ring-offset-2 focus:ring-offset-slate-950",
 
-    // UI Elements & Cards
-    surface: "bg-white/5",
-    surfaceBorder: "border-white/10",
-    inputBg: "bg-slate-900",
+    // Standard Cards & Elements
+    cardBg: "bg-slate-900/60 backdrop-blur-md shadow-xl shadow-black/20",
+    cardBorder: "border-slate-800/80",
+    surface: "bg-slate-900/40 backdrop-blur-sm",
+    surfaceBorder: "border-slate-800/60",
+    inputBg: "bg-slate-900/80",
     inputBorder: "border-slate-800 focus-within:border-indigo-500/50",
     iconContainer:
-      "bg-slate-900 border-slate-800 hover:text-indigo-400 hover:border-slate-700",
+      "bg-slate-900/80 border-slate-800 hover:text-indigo-400 hover:border-slate-700 text-slate-400",
+
+    // Permanent Dark Card Tokens
+    darkCardBg: "bg-slate-900/80 backdrop-blur-md",
+    darkCardBorder: "border-slate-800",
+    darkTextPrimary: "text-white",
+    darkTextSecondary: "text-slate-400",
+    darkSurface: "bg-slate-800/50",
+    darkSurfaceBorder: "border-slate-700/60",
+    darkSurfaceHover: "hover:bg-slate-800 hover:border-slate-700",
 
     // Toggle Specific Tokens
-    toggleTrack: "bg-[#7c6cf0]/40",
-    toggleThumb: "bg-[#f3ede0]",
-    toggleIcon: "text-[#7c6cf0]",
+    toggleTrack: "bg-slate-800 hover:bg-slate-700 border border-slate-700/60",
+    toggleThumb: "bg-indigo-500 shadow-sm shadow-indigo-950",
+    toggleIcon: "text-slate-100",
 
     // Brand Gradients, Accents & Buttons
-    brandGlyph: "from-[#a99df5] to-[#7c6cf0]",
-    linkUnderline: "bg-[#a99df5]",
-    linkUnderlineHex: "#a99df5",
-    ctaButton:
-      "bg-gradient-to-r from-[#7c6cf0] to-[#5b46e0] hover:from-[#6b5be0] hover:to-[#4c39cb] text-white shadow-[0_10px_25px_-5px_rgba(124,108,240,0.4)]",
-    primaryButton: "bg-indigo-600 hover:bg-indigo-500 text-white",
+    brandGlyph: "from-indigo-400 to-violet-400",
+    linkUnderline: "bg-indigo-400",
+    linkUnderlineHex: "#818cf8",
+
+    // Canvas Background Blob Palette
+    gradientColors: [
+      "#312e81",
+      "#4338ca",
+      "#6366f1",
+      "#818cf8",
+      "#c084fc",
+      "#d8b4fe",
+    ],
   },
 };

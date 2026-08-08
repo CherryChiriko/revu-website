@@ -1,60 +1,34 @@
-import {
-  createContext,
-  useContext,
-  useState,
-  useCallback,
-  useMemo,
-} from "react";
+// src/context/ThemeContext.jsx
+import React, { createContext, useContext, useState } from "react";
 import { themes } from "../config/themes";
 
-const ThemeContext = createContext(null);
+const ThemeContext = createContext();
 
-export function ThemeProvider({ children, defaultTheme = "light" }) {
-  const [currentThemeId, setCurrentThemeId] = useState(defaultTheme);
+export function ThemeProvider({ children }) {
+  const [isDark, setIsDark] = useState(true);
 
-  const activeTheme = useMemo(
-    () => themes[currentThemeId] || themes.light,
-    [currentThemeId],
-  );
-
-  const toggleTheme = useCallback(() => {
-    setCurrentThemeId((prev) => (prev === "light" ? "dark" : "light"));
-  }, []);
-
-  const setTheme = useCallback((id) => {
-    if (themes[id]) {
-      setCurrentThemeId(id);
-    }
-  }, []);
-
-  const value = useMemo(
-    () => ({
-      // Spread all properties from active theme (e.g. navBg, ring, surface, etc.)
-      ...activeTheme,
-
-      // Retain activeTheme under 'theme' key for backwards compatibility
-      theme: activeTheme,
-
-      // Context metadata & controls
-      currentThemeId,
-      toggleTheme,
-      setTheme,
-      isDark: activeTheme.isDark,
-    }),
-    [activeTheme, currentThemeId, toggleTheme, setTheme],
-  );
+  const toggleTheme = () => setIsDark((prev) => !prev);
+  const currentTheme = isDark ? themes.dark : themes.light;
 
   return (
-    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
+    <ThemeContext.Provider
+      value={{
+        ...currentTheme, // Spreads current theme tokens directly (e.g. t.toggleTrack)
+        theme: currentTheme, // Retains t.theme reference for canvas/backgrounds
+        isDark,
+        setIsDark,
+        toggleTheme,
+      }}
+    >
+      {children}
+    </ThemeContext.Provider>
   );
 }
 
 export function useTheme() {
   const context = useContext(ThemeContext);
-
   if (!context) {
     throw new Error("useTheme must be used within a ThemeProvider");
   }
-
   return context;
 }

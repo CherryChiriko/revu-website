@@ -1,7 +1,10 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTheme } from "../../context/ThemeContext";
 
 export default function Card({ feature }) {
+  const theme = useTheme();
+
   const {
     icon,
     badge,
@@ -11,12 +14,11 @@ export default function Card({ feature }) {
     gradient,
     accentColor,
     borderColor,
-    preview,
   } = feature;
 
   return (
     <div
-      className={`group relative rounded-3xl border border-slate-800/80 bg-slate-950/60 p-8 backdrop-blur-xl transition-all duration-300 hover:scale-[1.01] hover:shadow-[0_0_35px_rgba(99,102,241,0.12)] flex flex-col justify-between overflow-hidden ${colSpan} ${borderColor}`}
+      className={`group relative rounded-3xl border ${theme.darkCardBorder} ${theme.darkCardBg} p-8 backdrop-blur-xl transition-all duration-300 hover:scale-[1.01] hover:shadow-[0_0_35px_rgba(99,102,241,0.12)] flex flex-col justify-between overflow-hidden ${colSpan} ${borderColor}`}
     >
       {/* Top Right Ambient Glow Accent */}
       <div
@@ -27,20 +29,26 @@ export default function Card({ feature }) {
         {/* Card Header Tag & Icon */}
         <div className="flex items-center justify-between mb-6">
           <div
-            className={`p-3 rounded-2xl bg-slate-900 border border-slate-800 ${accentColor}`}
+            className={`p-3 rounded-2xl ${theme.darkSurface} border ${theme.darkSurfaceBorder} ${accentColor}`}
           >
             <FontAwesomeIcon icon={icon} className="w-5 h-5" />
           </div>
-          <span className="text-xs font-semibold px-3 py-1 rounded-full bg-slate-900/80 border border-slate-800 text-slate-400 tracking-wider uppercase">
+          <span
+            className={`text-xs font-semibold px-3 py-1 rounded-full ${theme.darkSurface} border ${theme.darkSurfaceBorder} ${theme.darkTextSecondary} tracking-wider uppercase`}
+          >
             {badge}
           </span>
         </div>
 
         {/* Title & Description */}
-        <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-indigo-200 transition-colors">
+        <h3
+          className={`text-2xl font-bold ${theme.darkTextPrimary} mb-3 group-hover:text-indigo-200 transition-colors`}
+        >
           {title}
         </h3>
-        <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
+        <p
+          className={`${theme.darkTextSecondary} text-sm sm:text-base leading-relaxed`}
+        >
           {description}
         </p>
       </div>

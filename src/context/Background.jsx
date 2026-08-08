@@ -15,19 +15,6 @@ export default function Background({ children, className = "" }) {
   const startTimeRef = useRef(null);
   const { theme } = useTheme();
 
-  const getColors = useCallback(() => {
-    const themeColors = theme.gradients?.colors || [];
-    if (themeColors.length === 0) {
-      return theme.isDark
-        ? ["#312e81", "#4338ca", "#6366f1", "#818cf8", "#c084fc", "#d8b4fe"]
-        : ["#a5b4fc", "#c084fc", "#f0abfc", "#38bdf8", "#818cf8", "#f472b6"];
-    }
-    return Array.from(
-      { length: 10 },
-      (_, i) => themeColors[i % themeColors.length],
-    );
-  }, [theme]);
-
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -37,7 +24,7 @@ export default function Background({ children, className = "" }) {
     startTimeRef.current = performance.now();
 
     const initBlobs = () => {
-      const colors = getColors();
+      const colors = theme.gradientColors;
 
       const behaviors = [
         { radius: 0.35, driftSpeed: 0.0006, followWeight: 0.05, delay: 0 },
@@ -209,7 +196,7 @@ export default function Background({ children, className = "" }) {
       window.removeEventListener("mousemove", handleMouseMove);
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
-  }, [theme, getColors]);
+  }, [theme]);
 
   return (
     <div

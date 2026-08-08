@@ -17,7 +17,7 @@ export default function Features() {
           className={`text-4xl sm:text-6xl font-extrabold tracking-tight leading-[1.1] ${theme.textPrimary}`}
         >
           Everything you need to make words{" "}
-          <span className={theme.textHighlight}>UNFORGETTABLE.</span>
+          <span className={theme.textHighlight}>unforgettable.</span>
         </h2>
 
         <p
