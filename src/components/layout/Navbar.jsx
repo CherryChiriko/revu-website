@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useTheme } from "../../context/ThemeContext";
 import RevuLogo from "@assets/Revu_logo.png";
 import ThemeToggle from "../ui/ThemeToggle";
+import Button from "../ui/Button";
 
 const NAV_LINKS = [
   { href: "#how", label: "How it works" },
@@ -67,11 +68,8 @@ export default function Navbar() {
           {/* Actions & Controls */}
           <div className="flex items-center gap-3 sm:gap-4">
             {/* Theme Toggle Wrapper */}
-            <div
-              className={`p-1 rounded-full border transition-colors ${t.surface} ${t.surfaceBorder}`}
-            >
-              <ThemeToggle />
-            </div>
+
+            <ThemeToggle />
 
             <a
               href="#"
@@ -81,12 +79,9 @@ export default function Navbar() {
             </a>
 
             {/* Primary CTA */}
-            <a
-              href="#pricing"
-              className={`px-5 py-2 rounded-full text-sm font-semibold tracking-tight transition-all duration-300 transform hover:-translate-y-0.5 ${t.ctaButton}`}
-            >
-              Start free
-            </a>
+            <Button href="#pricing" variant="accent" size="md">
+              Get Started
+            </Button>
 
             {/* Mobile Menu Button */}
             <button
