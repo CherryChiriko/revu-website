@@ -1,6 +1,7 @@
 // src/components/layout/Navbar.jsx
 import { useState } from "react";
 import { useTheme } from "../../context/ThemeContext";
+import { useAuth } from "../../context/AuthContext";
 import useScrolled from "../../hooks/useScrolled";
 import RevuLogo from "@assets/Revu_logo.png";
 import ThemeToggle from "../ui/ThemeToggle";
@@ -16,6 +17,7 @@ const NAV_LINKS = [
 
 export default function Navbar() {
   const t = useTheme();
+  const { openLogin, openSignup } = useAuth();
   const isScrolled = useScrolled(10);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -53,14 +55,17 @@ export default function Navbar() {
         <div className="flex items-center gap-3 sm:gap-4">
           <ThemeToggle />
 
-          <a
-            href="#login"
+          {/* Log in Button */}
+          <button
+            type="button"
+            onClick={openLogin}
             className={`hidden sm:inline-flex text-sm font-medium transition-colors px-3 py-2 rounded-lg ${t.textSecondary} ${t.textHover}`}
           >
             Log in
-          </a>
+          </button>
 
-          <Button href="#pricing" variant="accent" size="md">
+          {/* Get Started CTA */}
+          <Button onClick={openSignup} variant="accent" size="md">
             Get Started
           </Button>
 
@@ -97,7 +102,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Dropdown Drawer */}
+      {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
         <div
           className={`md:hidden px-6 pt-3 pb-6 border-b transition-colors backdrop-blur-xl ${t.navBg} ${t.navBorder}`}
@@ -117,13 +122,16 @@ export default function Navbar() {
             <hr className={t.surfaceBorder} />
 
             <div className="flex flex-col gap-3 pt-2">
-              <a
-                href="#login"
-                onClick={() => setMobileMenuOpen(false)}
-                className={`text-center transition-colors py-2 rounded-lg ${t.textSecondary} ${t.textHover}`}
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  openLogin();
+                }}
+                className={`w-full text-center transition-colors py-2 rounded-lg ${t.textSecondary} ${t.textHover}`}
               >
                 Log in
-              </a>
+              </button>
             </div>
           </div>
         </div>

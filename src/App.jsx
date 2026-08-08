@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { ThemeProvider } from "./context/ThemeContext";
 import Navbar from "./components/layout/Navbar";
 import Background from "./context/Background";
 import Hero from "./components/sections/Hero";
@@ -12,18 +11,12 @@ import FAQ from "./components/sections/FAQ";
 import FinalCTA from "./components/sections/FinalCTA";
 import Footer from "./components/layout/Footer";
 import ScrollToTop from "./components/ui/ScrollToTop";
-import AuthModal from "./components/modals/AuthModal";
 // hero ok, navbar - not sticky, features - copywrite+themes, finalcta ok, footer ok
 export default function App() {
-  const [authModal, setAuthModal] = useState({ isOpen: false, mode: "signup" });
-
-  const openAuth = (mode = "signup") => setAuthModal({ isOpen: true, mode });
-  const closeAuth = () => setAuthModal({ isOpen: false, mode: "signup" });
-
   return (
-    <ThemeProvider>
+    <div className="min-h-screen">
       <Background>
-        <Navbar onOpenAuth={openAuth} />
+        <Navbar />
         <main>
           {/* <Hero /> */}
           {/* <HowItWorks /> */}
@@ -33,15 +26,10 @@ export default function App() {
           {/* <FAQ /> */}
           <DeckMarketplace onDownloadDeck={() => openAuth("signup")} />
           <FinalCTA onStart={() => window.openCheckout?.("pro")} />
-          <AuthModal
-            isOpen={authModal.isOpen}
-            initialMode={authModal.mode}
-            onClose={closeAuth}
-          />
         </main>
         <Footer />
         <ScrollToTop />
       </Background>
-    </ThemeProvider>
+    </div>
   );
 }
